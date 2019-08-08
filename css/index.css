@@ -1,0 +1,47 @@
+:root {
+   --button-size: 60px; 
+   --half-button-size: calc(var(--button-size) / 2);
+   --color-push: #379D1F;
+   --color-pull: #ADEE50;
+}
+
+p {
+   margin: 0;
+}
+
+div {
+    display: inline-block;
+    position: relative;
+    height: var(--button-size);
+    width: var(--button-size);
+    margin: 0;
+    margin-right: 10px;
+}
+
+.empty {
+   width: var(--half-button-size);
+}
+  
+.top,
+.bottom {
+height: var(--half-button-size);
+width: var(--button-size);
+text-align: center;
+vertical-align: middle;
+line-height: var(--half-button-size);
+position: absolute;
+margin: 0;
+}
+
+.top {
+background: var(--color-push);
+border-top-left-radius: var(--button-size);
+border-top-right-radius: var(--button-size);
+}
+
+.bottom {
+background: var(--color-pull);
+border-bottom-left-radius: var(--button-size);
+border-bottom-right-radius: var(--button-size);
+margin-top: var(--half-button-size);
+}
