@@ -16,6 +16,8 @@ function startup() {
     root.style.setProperty('--color-pull',colorPull.value);
   }, false);
   colorPull.select();
+
+  // load KeyboardLayout
 }
 
 function updateColorPush(event) {
@@ -24,5 +26,8 @@ function updateColorPush(event) {
 }
 
 function assignKeyboardLayout() {
-    document.getElementById("1'_").innerHTML = "a";
+    myObj = { "2":"c", "2'":"d", "2'_":"e", "1_":null, "3'":"g"};
+    for (x in GC_2) {
+        document.getElementById(x).innerHTML = GC_2[x];
+    } 
 }
