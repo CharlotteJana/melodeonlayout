@@ -27,7 +27,12 @@ function updateColorPush(event) {
 
 function assignKeyboardLayout() {
     myObj = { "2":"c", "2'":"d", "2'_":"e", "1_":null, "3'":"g"};
-    for (x in GC_2) {
-        document.getElementById(x).innerHTML = GC_2[x];
+    for (var x in GC_2) {
+        if (GC_2.hasOwnProperty(x)){
+            try{
+                document.getElementById(x).innerHTML = GC_2[x];
+            }
+            catch (e) {continue}
+        }
     } 
 }

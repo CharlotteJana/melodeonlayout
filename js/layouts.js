@@ -1,4 +1,4 @@
-GC_2 = { // G-C accordeon with 2 rows
+var GC_2 = { // G-C accordeon with 2 rows
     //push
     "1'":"e","2'":"g","3'":"c","4'":"e","5'":"g","6'":"c","7'":"e","8'":"g","9'":"c","10'":"e","11'":"g",
     "1":"h","2":"d","3":"g","4":"h","5":"d","6":"g","7":"h","8":"d","9":"g","10":"h","11":"d","12":"g",
@@ -7,7 +7,7 @@ GC_2 = { // G-C accordeon with 2 rows
     "1_":"e","2_":"fis","3_":"a","4_":"c","5_":"e","6_":"fis","7_":"a","8_":"c","9_":"e","10_":"fis","11_":"a","12_":"c",   
 }
 
-GC_2_dutch = { // G-C accordeon with 2 rows, reeds of button 5' are swaped (a and g)
+var GC_2_dutch = { // G-C accordeon with 2 rows, reeds of button 5' are swaped (a and g)
     //push
     "1'":"e","2'":"g","3'":"c","4'":"e","5'":"a","6'":"c","7'":"e","8'":"g","9'":"c","10'":"e","11'":"g",
     "1":"h","2":"d","3":"g","4":"h","5":"d","6":"g","7":"h","8":"d","9":"g","10":"h","11":"d","12":"g",
