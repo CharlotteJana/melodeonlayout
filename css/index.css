@@ -9,24 +9,22 @@
    margin: 0;
 }
 
-.number {
-   width: var(--button-size);
-   text-align: center;
-}
-  
-div {
+.button, .empty, .number {
    display: inline-block;
    position: relative;
-   height: var(--half-button-size);
    width: var(--button-size); 
-   margin: 0 1vw 1vw 0;
+   height: var(--button-size);
+   border: 1px solid rgb(226, 48, 48);
 }
+
 .top, .bottom {
    text-align: center;
    vertical-align: middle;
-   line-height: 50%;
+   line-height: var(--half-button-size);
    position: absolute;
-   margin: 0;
+   height: var(--half-button-size);
+   width: var(--button-size); 
+   border: 1px solid black;
 }
 
 .top {
@@ -40,4 +38,8 @@ div {
    border-bottom-left-radius: var(--button-size);
    border-bottom-right-radius: var(--button-size);
    margin-top: var(--half-button-size);
+}
+
+.number {
+   text-align: left;
 }

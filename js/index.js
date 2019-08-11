@@ -27,10 +27,11 @@ function updateColorPush(event) {
 
 function assignKeyboardLayout() {
     myObj = { "2":"c", "2'":"d", "2'_":"e", "1_":null, "3'":"g"};
-    for (var x in GC_2) {
-        if (GC_2.hasOwnProperty(x)){
+    layout = GC_3_heim;
+    for (var x in layout) {
+        if (layout.hasOwnProperty(x)){
             try{
-                document.getElementById(x).innerHTML = GC_2[x];
+                document.getElementById(x).innerHTML = layout[x];
             }
             catch (e) {continue}
         }
