@@ -43,3 +43,7 @@
 .number {
    text-align: left;
 }
+
+#keyboard {
+   border: 1px solid blue;
+}

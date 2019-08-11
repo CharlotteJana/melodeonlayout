@@ -37,3 +37,21 @@ function assignKeyboardLayout() {
         }
     } 
 }
+
+function rotateKeyboard() {
+    var obj = document.getElementById("keyboard");
+
+    var deg = obj.style.transform;
+    if (deg === "") {
+        deg = 90;
+    }
+    else {
+        deg = parseInt(deg.match(/\d+/gi).join('')) + 90; // existing degrees + 90
+    }
+
+    obj.style.webkitTransform = 'rotate('+deg+'deg)'; 
+    obj.style.mozTransform    = 'rotate('+deg+'deg)'; 
+    obj.style.msTransform     = 'rotate('+deg+'deg)'; 
+    obj.style.oTransform      = 'rotate('+deg+'deg)'; 
+    obj.style.transform       = 'rotate('+deg+'deg)'; 
+}
