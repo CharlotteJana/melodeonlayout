@@ -1,42 +1,43 @@
 :root {
-   --button-size: 60px; 
+   --button-size: 5vw; 
    --half-button-size: calc(var(--button-size) / 2);
    --color-push: #379D1F;
    --color-pull: #ADEE50;
 }
 
-div {
-    display: inline-block;
-    position: relative;
-    height: var(--button-size);
-    width: var(--button-size);
-    margin-right: 10px;
+.row {
+   margin: 0;
 }
 
-.empty {
-   width: var(--half-button-size);
+.number {
+   width: var(--button-size);
+   text-align: center;
 }
   
-.top,
-.bottom {
-height: var(--half-button-size);
-width: var(--button-size);
-text-align: center;
-vertical-align: middle;
-line-height: var(--half-button-size);
-position: absolute;
-margin: 0;
+div {
+   display: inline-block;
+   position: relative;
+   height: var(--half-button-size);
+   width: var(--button-size); 
+   margin: 0 1vw 1vw 0;
+}
+.top, .bottom {
+   text-align: center;
+   vertical-align: middle;
+   line-height: 50%;
+   position: absolute;
+   margin: 0;
 }
 
 .top {
-background: var(--color-push);
-border-top-left-radius: var(--button-size);
-border-top-right-radius: var(--button-size);
+   background: var(--color-push);
+   border-top-left-radius: var(--button-size);
+   border-top-right-radius: var(--button-size);
 }
 
 .bottom {
-background: var(--color-pull);
-border-bottom-left-radius: var(--button-size);
-border-bottom-right-radius: var(--button-size);
-margin-top: var(--half-button-size);
+   background: var(--color-pull);
+   border-bottom-left-radius: var(--button-size);
+   border-bottom-right-radius: var(--button-size);
+   margin-top: var(--half-button-size);
 }
