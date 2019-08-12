@@ -46,4 +46,21 @@
 
 #keyboard {
    border: 1px solid blue;
+   display: inline-block;
 }
+
+.ppbutton, hr {
+   border-radius: 5px;
+   width: calc(1.5 * var(--button-size));
+   display: block;
+}
+
+hr { 
+   position: absolute;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+   margin-left: auto;
+   margin-right: auto;
+   border-style: inset;
+   border-width: 1px;
+ } 

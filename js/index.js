@@ -55,3 +55,5 @@ function rotateKeyboard() {
     obj.style.oTransform      = 'rotate('+deg+'deg)'; 
     obj.style.transform       = 'rotate('+deg+'deg)'; 
 }
+
+// css display: https://codeburst.io/common-problems-in-positioning-elements-in-css-best-practices-b03ac54dbdcb
