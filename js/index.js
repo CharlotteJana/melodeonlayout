@@ -38,22 +38,39 @@ function assignKeyboardLayout() {
     } 
 }
 
+var direction = 0;
 function rotateKeyboard() {
-    var obj = document.getElementById("keyboard");
+    var kb = document.querySelector("#keyboard");
+    var btns = document.querySelectorAll(".button");
 
-    var deg = obj.style.transform;
-    if (deg === "") {
-        deg = 90;
-    }
-    else {
-        deg = parseInt(deg.match(/\d+/gi).join('')) + 90; // existing degrees + 90
+    switch (direction) {
+        case 0:
+            kb.style.flexDirection = "row";  
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.display = "block";
+            } 
+            break;
+        case 1:
+            kb.style.flexDirection = "column";
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.display = "inline-block";
+            }
+            break;
+        case 2:
+            kb.style.flexDirection = "row-reverse";
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.display = "block";
+            }
+            break;
+        case 3:
+            kb.style.flexDirection = "column-reverse";
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.display = "inline-block";
+            }
+            break;
     }
 
-    obj.style.webkitTransform = 'rotate('+deg+'deg)'; 
-    obj.style.mozTransform    = 'rotate('+deg+'deg)'; 
-    obj.style.msTransform     = 'rotate('+deg+'deg)'; 
-    obj.style.oTransform      = 'rotate('+deg+'deg)'; 
-    obj.style.transform       = 'rotate('+deg+'deg)'; 
+    direction = (direction + 1) % 4; // possible values: 0, 1, 2, 3
 }
 
 // css display: https://codeburst.io/common-problems-in-positioning-elements-in-css-best-practices-b03ac54dbdcb

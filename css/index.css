@@ -1,20 +1,23 @@
 :root {
-   --button-size: 5vw; 
+   --button-size: 6vw; 
    --half-button-size: calc(var(--button-size) / 2);
    --color-push: #379D1F;
    --color-pull: #ADEE50;
 }
 
 .row {
-   margin: 0;
+   display: block;
+   flex-shrink: 0;
 }
 
-.button, .empty, .number {
+.button {
    display: inline-block;
    position: relative;
+   margin: 0.3vw;
    width: var(--button-size); 
    height: var(--button-size);
    border: 1px solid rgb(226, 48, 48);
+   border: none;
 }
 
 .top, .bottom {
@@ -46,7 +49,10 @@
 
 #keyboard {
    border: 1px solid blue;
-   display: inline-block;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start; 
 }
 
 .ppbutton, hr {
