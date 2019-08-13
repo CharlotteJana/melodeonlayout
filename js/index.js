@@ -1,13 +1,34 @@
 
-let root = document.documentElement;
+var root = document.documentElement;
 var colorPush;
 var colorPull;
 
 window.addEventListener("load", startup, false);
 function startup() {
+
+  // push button
+  var pushBtn = document.querySelector("#push");
+  pushBtn.onclick = function() {
+    topdivs = document.querySelectorAll(".top");
+    for (var i = 0; i < topdivs.length; i++) {
+        topdivs[i].classList.toggle("hidden");
+    }
+  };
+
+  // pull button
+  var pullBtn = document.querySelector("#pull");
+  pullBtn.onclick = function() {
+      bottomdivs = document.querySelectorAll(".bottom");
+      for (var i = 0; i < bottomdivs.length; i++) {
+          bottomdivs[i].classList.toggle("hidden");
+      }
+  }
+
   // Choose color for push buttons
   colorPush = document.querySelector("#color_push");
-  colorPush.addEventListener("input", updateColorPush, false);
+  colorPush.addEventListener("input", function(){
+    root.style.setProperty('--color-push', colorPush.value);
+  }, false);
   colorPush.select();
 
   // Choose color for pull buttons
@@ -18,16 +39,14 @@ function startup() {
   colorPull.select();
 
   // load KeyboardLayout
+  assignKeyboardLayout(GC_3_heim);
 }
 
-function updateColorPush(event) {
-    // Farbvariable schreiben
-    root.style.setProperty('--color-push',colorPush.value);
-}
+//######################
+//     settings
+//######################
 
-function assignKeyboardLayout() {
-    myObj = { "2":"c", "2'":"d", "2'_":"e", "1_":null, "3'":"g"};
-    layout = GC_3_heim;
+function assignKeyboardLayout(layout) {
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
@@ -38,7 +57,7 @@ function assignKeyboardLayout() {
     } 
 }
 
-var direction = 0;
+var direction = 2;
 function rotateKeyboard() {
     var kb = document.querySelector("#keyboard");
     var btns = document.querySelectorAll(".button");
@@ -50,7 +69,7 @@ function rotateKeyboard() {
                 btns[i].style.display = "block";
             } 
             break;
-        case 1:
+        case 1: // default variant
             kb.style.flexDirection = "column";
             for (var i = 0; i < btns.length; i++) {
                 btns[i].style.display = "inline-block";

@@ -47,6 +47,11 @@
    text-align: left;
 }
 
+.hidden {
+   background-color: white;
+   color: white;
+}
+
 #keyboard {
    border: 1px solid blue;
    margin: 0 auto;
@@ -56,6 +61,8 @@
 }
 
 .ppbutton, hr {
+   cursor: pointer;
+   color: black !important;
    border-radius: 5px;
    width: calc(1.5 * var(--button-size));
    display: block;
