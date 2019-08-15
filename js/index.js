@@ -60,31 +60,31 @@ function assignKeyboardLayout(layout) {
 var direction = 2;
 function rotateKeyboard() {
     var kb = document.querySelector("#keyboard");
-    var btns = document.querySelectorAll(".button");
+    var rows = document.querySelectorAll(".row");
 
     switch (direction) {
         case 0:
             kb.style.flexDirection = "row";  
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].style.display = "block";
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.flexDirection = "column";
             } 
             break;
         case 1: // default variant
             kb.style.flexDirection = "column";
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].style.display = "inline-block";
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.flexDirection = "row";
             }
             break;
         case 2:
             kb.style.flexDirection = "row-reverse";
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].style.display = "block";
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.flexDirection = "column";
             }
             break;
         case 3:
             kb.style.flexDirection = "column-reverse";
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].style.display = "inline-block";
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.flexDirection = "row";
             }
             break;
     }

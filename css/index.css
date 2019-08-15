@@ -6,16 +6,15 @@
 }
 
 .row {
-   display: block;
-   flex-shrink: 0;
+   display: flex;
+   flex-direction: row;
 }
 
 .button {
-   display: inline-block;
-   position: relative;
+   display: flex;
+   flex-direction: column;
    margin: 0.3vw;
    width: var(--button-size); 
-   height: var(--button-size);
    border: 1px solid rgb(226, 48, 48);
    border: none;
 }
@@ -24,7 +23,6 @@
    text-align: center;
    vertical-align: middle;
    line-height: var(--half-button-size);
-   position: absolute;
    height: var(--half-button-size);
    width: var(--button-size); 
    border: 1px solid black;
@@ -40,7 +38,6 @@
    background: var(--color-pull);
    border-bottom-left-radius: var(--button-size);
    border-bottom-right-radius: var(--button-size);
-   margin-top: var(--half-button-size);
 }
 
 .number {
@@ -65,11 +62,17 @@
    color: black !important;
    border-radius: 5px;
    width: calc(1.5 * var(--button-size));
-   display: block;
+   position: relative;
+}
+
+#ppdiv {
+   display: flex;
+   flex-direction: column;
+   height: calc(2.5 * var(--half-button-size));
 }
 
 hr { 
-   position: absolute;
+   position: relative;
    margin-top: 0.5em;
    margin-bottom: 0.5em;
    margin-left: auto;
