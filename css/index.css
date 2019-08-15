@@ -30,14 +30,10 @@
 
 .push {
    background: var(--color-push);
-   border-top-left-radius: var(--button-size);
-   border-top-right-radius: var(--button-size);
 }
 
 .pull {
    background: var(--color-pull);
-   border-bottom-left-radius: var(--button-size);
-   border-bottom-right-radius: var(--button-size);
 }
 
 .number {
@@ -84,4 +80,25 @@ hr {
    margin-right: auto;
    border-style: inset;
    border-width: 1px;
- } 
+ }
+
+ .top {
+   border-top-left-radius: var(--button-size);
+   border-top-right-radius: var(--button-size);
+ }
+
+ .bottom {
+   border-bottom-left-radius: var(--button-size);
+   border-bottom-right-radius: var(--button-size);
+ }
+
+ .left {
+  border-top-left-radius: var(--button-size);
+  border-bottom-left-radius: var(--button-size);
+ }
+
+ .right {
+   border-top-right-radius: var(--button-size);
+   border-bottom-right-radius: var(--button-size);
+ }
+
