@@ -7,20 +7,20 @@ window.addEventListener("load", startup, false);
 function startup() {
 
   // push button
-  var pushBtn = document.querySelector("#push");
+  var pushBtn = document.querySelector("#pushbtn");
   pushBtn.onclick = function() {
-    topdivs = document.querySelectorAll(".top");
-    for (var i = 0; i < topdivs.length; i++) {
-        topdivs[i].classList.toggle("hidden");
+    pushdivs = document.querySelectorAll(".push");
+    for (var i = 0; i < pushdivs.length; i++) {
+        pushdivs[i].classList.toggle("hidden");
     }
   };
 
   // pull button
-  var pullBtn = document.querySelector("#pull");
+  var pullBtn = document.querySelector("#pullbtn");
   pullBtn.onclick = function() {
-      bottomdivs = document.querySelectorAll(".bottom");
-      for (var i = 0; i < bottomdivs.length; i++) {
-          bottomdivs[i].classList.toggle("hidden");
+      pulldivs = document.querySelectorAll(".pull");
+      for (var i = 0; i < pulldivs.length; i++) {
+          pulldivs[i].classList.toggle("hidden");
       }
   }
 
