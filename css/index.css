@@ -22,9 +22,6 @@
 .push, .pull {
    text-align: center;
    vertical-align: middle;
-   line-height: var(--half-button-size);
-   height: var(--half-button-size);
-   width: var(--button-size); 
    border: 1px solid black;
 }
 
@@ -56,19 +53,22 @@
    cursor: pointer;
    color: black !important;
    border-radius: 5px;
-   width: calc(1.5 * var(--button-size));
    position: relative;
+   width: calc(1.5 * var(--button-size));
 }
 
 .settingbtn {
-   width: var(--half-button-size);
-   height: var(--half-button-size);
+   --button-size: 20px;
+   --half-button-size: calc(var(--button-size) / 2);
+   width: var(--button-size);
+   height: var(--button-size);
    display: flex;
 }
 
 #ppdiv {
    display: flex;
    flex-direction: column;
+   align-items: stretch;
    height: calc(2.5 * var(--half-button-size));
 }
 
@@ -85,20 +85,32 @@ hr {
  .top {
    border-top-left-radius: var(--button-size);
    border-top-right-radius: var(--button-size);
+   height: var(--half-button-size);
+   width: var(--button-size); 
+   line-height: var(--half-button-size);
  }
 
  .bottom {
    border-bottom-left-radius: var(--button-size);
    border-bottom-right-radius: var(--button-size);
+   height: var(--half-button-size);
+   width: var(--button-size); 
+   line-height: var(--half-button-size);
  }
 
  .left {
   border-top-left-radius: var(--button-size);
   border-bottom-left-radius: var(--button-size);
+  height: var(--button-size);
+  width: var(--half-button-size); 
+  line-height: var(--button-size);
  }
 
  .right {
    border-top-right-radius: var(--button-size);
    border-bottom-right-radius: var(--button-size);
+   height: var(--button-size);
+   width: var(--half-button-size); 
+   line-height: var(--button-size);
  }
 

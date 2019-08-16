@@ -1,8 +1,8 @@
 <html>
     <head>      
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css"> 
         <script src="js/layouts.js"></script>
-        <script src="js/index.js"></script> 
+        <script src="js/index.js"></script>
         <title>Test</title>
     </head>
     <body>
@@ -194,30 +194,36 @@
         </p>
         <p>
             Ausrichtung der Tasten:
-            <button>
-                <div class="settingbtn" style="flex-direction: column">
-                    <div class="push top"></div>
-                    <div class="pull bottom"></div>
-                </div>
-            </button>
-            <button>
-                <div class="settingbtn" style="flex-direction: row-reverse">
-                    <div class="push right"></div>
-                    <div class="pull left"></div>
-                </div>
-            </button>
-            <button>
-                <div class="settingbtn" style="flex-direction: column-reverse">
-                    <div class="push bottom"></div>
-                    <div class="pull top"></div>
-                </div>
-            </button>
-            <button>
-                <div class="settingbtn" style="flex-direction: row">
-                    <div class="push left"></div>
-                    <div class="pull right"></div>
-                </div>
-            </button>
+            <div class="row">
+                <button onclick="adjustKeys(1)">
+                    <div class="settingbtn" 
+                         style="flex-direction: column">
+                        <div class="push top"></div>
+                        <div class="pull bottom"></div>
+                    </div>
+                </button>
+                <button onclick="adjustKeys(2)">
+                    <div class="settingbtn" 
+                         style="flex-direction: row-reverse">
+                        <div class="push right"></div>
+                        <div class="pull left"></div>
+                    </div>
+                </button>
+                <button onclick="adjustKeys(3)">
+                    <div class="settingbtn" 
+                         style="flex-direction: column-reverse">
+                        <div class="push bottom"></div>
+                        <div class="pull top"></div>
+                    </div>
+                </button>
+                <button onclick="adjustKeys(4)">
+                    <div class="settingbtn" 
+                         style="flex-direction: row">
+                        <div class="push left"></div>
+                        <div class="pull right"></div>
+                    </div>
+                </button>
+            </div>
         </p>
     </body>
 </html>
