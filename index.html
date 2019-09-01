@@ -16,7 +16,100 @@
                 <!---Fallback--->
                 Ihr Browser kann leider kein svg darstellen. 
             </object>
+            <div class="empty button" style="width: calc(0.5 * var(--button-size))"></div>
+            <button class="settingbtn" onclick="toggleSettings()">≡</button>
         </div>
+        <div id="settings" class="row" style="display: none;">
+            <div>
+            <p><b>Tastenbelegung</b></p>
+            <p> Anzahl der Reihen:
+                <select>
+                <option value="3">3</option>
+                <option value="2.5">2.5</option>
+                <option value="2">2</option>
+              </select>
+            </p>
+            <p> Belegung 1. Reihe:
+                <select>
+                <option value="G">G</option>
+                <option value="C">C</option>
+                <option value="edit">benutzerdefiniert</option>
+                </select>
+            </p>
+            <p> Belegung 2. Reihe:
+                <select>
+                <option value="C">C</option>
+                <option value="F">F</option>
+                <option value="edit">benutzerdefiniert</option>
+                </select>
+            </p>
+            <p> Belegung 3. Reihe:
+                <select>
+                <option value="Heim">Heim</option>
+                <option value="edit">benutzerdefiniert</option>
+                </select>
+            </p>
+            <p>
+                <button onclick="assignKeyboardLayout()">Belegung bearbeiten</button>
+            </p>
+            </div>
+            <div>
+            <p><b>Aussehen</b></p>
+            <p>Zeige Melodieseite</p>
+            <p>Zeige Basseite</p>
+            <p>Beachte Oktavierungen</p>
+            <form>
+                <label for="color_push">Farbe Schieben: </label>
+                <input type="color" value="#379D1F" id="color_push">
+            </form>
+            <form>
+                <label for="color_pull">Farbe Ziehen: </label>
+                <input type="color" value="#ADEE50" id="color_pull">
+            </form>
+            <p>
+                Ausrichtung des Griffbretts: 
+                <button onclick="rotateKeyboard()">↻­­­­</button>
+                <button><div class="keyboard">
+                    <hr class="row" style="width: 30px; margin: 1px;">
+                    <hr class="row" style="width: 20px; margin: 1px;">
+                    <hr class="row" style="width: 10px; margin: 1px;">
+                </div></button>
+            </p>
+            <p>
+                Ausrichtung der Tasten:
+                <div class="row">
+                    <button onclick="adjustKeys(1)">
+                        <div class="settingbtn" 
+                            style="flex-direction: column">
+                            <div class="push top"></div>
+                            <div class="pull bottom"></div>
+                        </div>
+                    </button>
+                    <button onclick="adjustKeys(2)">
+                        <div class="settingbtn" 
+                            style="flex-direction: row-reverse">
+                            <div class="push right"></div>
+                            <div class="pull left"></div>
+                        </div>
+                    </button>
+                    <button onclick="adjustKeys(3)">
+                        <div class="settingbtn" 
+                            style="flex-direction: column-reverse">
+                            <div class="push bottom"></div>
+                            <div class="pull top"></div>
+                        </div>
+                    </button>
+                    <button onclick="adjustKeys(4)">
+                        <div class="settingbtn" 
+                            style="flex-direction: row">
+                            <div class="push left"></div>
+                            <div class="pull right"></div>
+                        </div>
+                    </button>
+                </div>
+            </p>
+            </div>
+        </div> 
         <p><b>Melodieseite</b></p>
         <div class="keyboard">
             <div id="row 3" class="row">
@@ -173,61 +266,6 @@
                 <div class="number button">11</div>
                 <div class="number button">12</div>
             </div>
-        </div>
-        <p><b>Einstellungen</b></p>
-        <p>
-            Layout wählen: 
-            <button onclick="assignKeyboardLayout()">Layout</button>
-        </p>
-        <form>
-            <label for="color_push">Farbe Schieben: </label>
-            <input type="color" value="#379D1F" id="color_push">
-        </form>
-        <form>
-            <label for="color_pull">Farbe Ziehen: </label>
-            <input type="color" value="#ADEE50" id="color_pull">
-        </form>
-        <p>
-            Ausrichtung des Griffbretts: 
-            <button onclick="rotateKeyboard()">↻­­­­</button>
-            <button><div class="keyboard">
-                <hr class="row" style="width: 30px; margin: 1px;">
-                <hr class="row" style="width: 20px; margin: 1px;">
-                <hr class="row" style="width: 10px; margin: 1px;">
-            </div></button>
-        </p>
-        <p>
-            Ausrichtung der Tasten:
-            <div class="row">
-                <button onclick="adjustKeys(1)">
-                    <div class="settingbtn" 
-                         style="flex-direction: column">
-                        <div class="push top"></div>
-                        <div class="pull bottom"></div>
-                    </div>
-                </button>
-                <button onclick="adjustKeys(2)">
-                    <div class="settingbtn" 
-                         style="flex-direction: row-reverse">
-                        <div class="push right"></div>
-                        <div class="pull left"></div>
-                    </div>
-                </button>
-                <button onclick="adjustKeys(3)">
-                    <div class="settingbtn" 
-                         style="flex-direction: column-reverse">
-                        <div class="push bottom"></div>
-                        <div class="pull top"></div>
-                    </div>
-                </button>
-                <button onclick="adjustKeys(4)">
-                    <div class="settingbtn" 
-                         style="flex-direction: row">
-                        <div class="push left"></div>
-                        <div class="pull right"></div>
-                    </div>
-                </button>
-            </div>
-        </p>
+        </div>      
     </body>
 </html>
