@@ -52,11 +52,6 @@
 .ppbutton {
    cursor: pointer;
    color: black !important;
-   border-radius: 5px !important;
-   position: relative;
-   width: 100px !important;
-   height: 23px !important;
-   line-height: normal !important;
 }
 
 .settingbtn {
