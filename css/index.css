@@ -5,6 +5,10 @@
    --color-pull: #ADEE50;
 }
 
+object {
+   height: var(--button-size);
+}
+
 .row {
    display: flex;
    flex-direction: row;
@@ -51,7 +55,6 @@
 
 .ppbutton {
    cursor: pointer;
-   color: black !important;
 }
 
 .settingbtn {
