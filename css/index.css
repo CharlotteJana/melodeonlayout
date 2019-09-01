@@ -1,5 +1,5 @@
 :root {
-   --button-size: 6vw; 
+   --button-size: 7vw; 
    --half-button-size: calc(var(--button-size) / 2);
    --color-push: #379D1F;
    --color-pull: #ADEE50;
@@ -49,12 +49,14 @@
    align-items: flex-start; 
 }
 
-.ppbutton, hr {
+.ppbutton {
    cursor: pointer;
    color: black !important;
-   border-radius: 5px;
+   border-radius: 5px !important;
    position: relative;
-   width: calc(1.5 * var(--button-size));
+   width: 100px !important;
+   height: 23px !important;
+   line-height: normal !important;
 }
 
 .settingbtn {
@@ -71,16 +73,6 @@
    align-items: stretch;
    height: calc(2.5 * var(--half-button-size));
 }
-
-hr { 
-   position: relative;
-   margin-top: 0.5em;
-   margin-bottom: 0.5em;
-   margin-left: auto;
-   margin-right: auto;
-   border-style: inset;
-   border-width: 1px;
- }
 
  .top {
    border-top-left-radius: var(--button-size);
