@@ -40,6 +40,7 @@ function startup() {
 
   // load KeyboardLayout
   assignKeyboardLayout(GC_3_heim);
+
 }
 
 //######################
@@ -169,3 +170,34 @@ function toggleSettings() {
       x.style.display = "none";
     }
   } 
+
+function showRows(number) {
+    var row3buttons = document.getElementById("row 3").children
+    switch(number){
+        case "2": 
+            for(i = 0; i < row3buttons.length; i++){
+                row3buttons[i].style.visibility = "collapse";
+            }
+            break;
+        case "2.5":
+            for(i = 0; i < row3buttons.length; i++){
+                var index = parseInt(row3buttons[i].id.replace("3.", ""));
+                if(index < 3 | index > 8)
+                    row3buttons[i].style.visibility = "hidden";
+                else
+                row3buttons[i].style.visibility = "visible";
+            }
+            break;
+        case "3": 
+            for(i = 0; i < row3buttons.length; i++){
+                row3buttons[i].style.visibility = "visible";
+            }
+            break;
+    }
+    for (i = 0; i < row3buttons.length; i++) {
+
+        console.log('row3buttons[i]: ', );
+        
+    }
+
+}

@@ -6,7 +6,7 @@
         <title>Test</title>
     </head>
     <body>
-        <div class="row">
+        <div id="firstLine" class="row"> 
             <div id="ppdiv" class="button">
                 <div id="pushbtn" class="push top ppbutton">⯮▥⯬</div>
                 <div id="pullbtn" class="pull bottom ppbutton">⯬▥⯮</div>
@@ -19,11 +19,11 @@
             <div class="empty button" style="width: calc(0.5 * var(--button-size))"></div>
             <button class="settingbtn" onclick="toggleSettings()">≡</button>
         </div>
-        <div id="settings" class="row" style="display: none;">
+        <div id="settings" class="row" style="display: none;"> 
             <div>
             <p><b>Tastenbelegung</b></p>
             <p> Anzahl der Reihen:
-                <select>
+                <select onChange="showRows(this.value)">
                 <option value="3">3</option>
                 <option value="2.5">2.5</option>
                 <option value="2">2</option>
@@ -114,43 +114,43 @@
         <div class="keyboard">
             <div id="row 3" class="row">
                 <div class="empty button" style="width: calc(1 * var(--button-size))"></div>
-                <div class="button">
+                <div id="3.1" class="button">
                     <div id="1''"  class="push top"></div>
                     <div id="1''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.2" class="button">
                     <div id="2''"  class="push top"></div>
                     <div id="2''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.3" class="button">
                     <div id="3''"  class="push top"></div>
                     <div id="3''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.4" class="button">
                     <div id="4''"  class="push top"></div>
                     <div id="4''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.5" class="button">
                     <div id="5''"  class="push top"></div>
                     <div id="5''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.6" class="button">
                     <div id="6''"  class="push top"></div>
                     <div id="6''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.7" class="button">
                     <div id="7''"  class="push top"></div>
                     <div id="7''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.8" class="button">
                     <div id="8''"  class="push top"></div>
                     <div id="8''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.9" class="button">
                     <div id="9''"  class="push top"></div>
                     <div id="9''_" class="pull bottom"></div>
                 </div>
-                <div class="button">
+                <div id="3.10" class="button">
                     <div id="10''"  class="push top"></div>
                     <div id="10''_" class="pull bottom"></div>
                 </div>        
