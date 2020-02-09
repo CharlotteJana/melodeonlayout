@@ -102,3 +102,8 @@ object {
    width: var(--half-button-size); 
    line-height: var(--button-size);
  }
+
+ rect {
+   cursor: pointer;
+   fill: blue;
+ }
