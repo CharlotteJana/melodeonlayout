@@ -41,6 +41,33 @@ function startup() {
   // load KeyboardLayout
   assignKeyboardLayout(GC_3_heim);
 
+  // load svg
+  var svgObject = document.getElementById('svg_object').contentDocument;
+  var svg = svgObject.getElementById('staff_short');
+  svgObject.getElementById('btn_b4_flat').addEventListener('click', changeFill, false);
+  svgObject.getElementById('btn_b4').addEventListener('click', changeFill, false);
+}
+
+//######################
+//    svg (staff)
+//######################
+
+function changeFill () {
+
+    var farben = new Array(
+        'red', 'skyblue', '#dfac20', '#ebf5d7','#e4ebf2', '#5a9900',
+        'lime', '#df6c20', 'brown', '#5c82d9', 'burlywood',
+        'blueviolet', '#c32e04', '#ffebe6' ,'#5c82d9'
+    );
+
+    var fuellFarbe = Math.floor(farben.length * Math.random());
+
+    if (fuellFarbe == farben.length) {
+        fuellFarbe = farben.length-1;
+    }
+
+    fuellFarbe = farben[fuellFarbe];
+    this.setAttribute('style', "opacity:0.3;fill:"+fuellFarbe+";fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1");
 }
 
 //######################
