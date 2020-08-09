@@ -251,42 +251,42 @@
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.38501287;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path501"
+     id="line_of_staff_1"
      d="M -8.5119545e-6,11.00124 355.10401,11.00124 m -355.1040185119545,0 z"
      class="fil2 str2" />
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.38501287;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path503"
+     id="line_of_staff_2"
      d="M -8.5119545e-6,16.64902 355.10401,16.64902 m -355.1040185119545,0 z"
      class="fil2 str2" />
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.38501287;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path505"
+     id="line_of_staff_3"
      d="M -8.5119545e-6,22.29774 355.10401,22.29774 m -355.1040185119545,0 z"
      class="fil2 str2" />
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.38501287;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path507"
+     id="line_of_staff_4"
      d="M -8.5119545e-6,27.94551 355.10401,27.94551 m -355.1040185119545,0 z"
      class="fil2 str2" />
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.38501287;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path509"
+     id="line_of_staff_5"
      d="M -8.5119545e-6,33.59329 355.10401,33.59329 m -355.1040185119545,0 z"
      class="fil2 str2" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.29754543;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path697"
+     id="end_of_staff_1"
      d="m 350.99384,10.99727 0,22.59233 m 0,-22.59233 z"
      class="fil2 str2"
      inkscape:connector-curvature="0" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.29754543;stroke-linejoin:bevel;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
-     id="path697-3"
+     id="end_of_staff_2"
      d="m 354.54545,11.06287 0,22.59233 m 0,-22.59233 z"
      class="fil2 str2"
      inkscape:connector-curvature="0" />
