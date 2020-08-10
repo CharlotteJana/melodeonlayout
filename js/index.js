@@ -39,7 +39,8 @@ function startup() {
   colorPull.select();
 
   // load KeyboardLayout
-  assignKeyboardLayout(GC_3_heim);
+  var note_names = window[document.querySelector('#language').value];
+  assignKeyboardLayout(GC_3_heim, note_names);
 
   // load svg
   var svgObject = document.getElementById('svg_object').contentDocument;
@@ -64,17 +65,18 @@ function toggleNote() {
     else if(this.getAttributeNS(null, 'style').includes('opacity:0%')){
         this.setAttributeNS(null, 'style', 'opacity:0.3;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
     }
+    console.log(this.getAttributeNS(null, 'id'));
 }
 
 //######################
 //     settings
 //######################
 
-function assignKeyboardLayout(layout) {
+function assignKeyboardLayout(layout, note_names) {
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
-                document.getElementById(x).innerHTML = layout[x];
+                document.getElementById(x).innerHTML = note_names[layout[x]];
             }
             catch (e) {continue}
         }
