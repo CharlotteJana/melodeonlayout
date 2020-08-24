@@ -2,6 +2,7 @@
 var root = document.documentElement;
 var colorPush;
 var colorPull;
+var keyboardLayout;
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -59,13 +60,32 @@ function startup() {
 //######################
 
 function toggleNote() {
+    var hide_notes_pull = document.querySelector("#pullbtn").classList.contains("hidden");
+    var hide_notes_push = document.querySelector("#pushbtn").classList.contains("hidden");
     if(this.getAttributeNS(null, 'style').includes('opacity:0.3')){
+        var hide_note = true;
         this.setAttributeNS(null, 'style', 'opacity:0%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
     }
     else if(this.getAttributeNS(null, 'style').includes('opacity:0%')){
+        var hide_note = false;
         this.setAttributeNS(null, 'style', 'opacity:0.3;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
     }
-    console.log(this.getAttributeNS(null, 'id'));
+    var note_with_oct = this.getAttributeNS(null, 'id').slice(4); // note with octave specification in scientific pitch notation, i.e. f4_flat
+    var note_no_oct = note_with_oct.replace(/[0-9]/g, ''); // note without octave specification, i.e. f_flat
+    var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_no_oct);
+    for (let i = 0; i < button_ids.length; i++) {
+        var a = document.getElementById(button_ids[i]);
+        console.log(hide_note);
+        if(hide_note){
+            a.classList.add("hidden")
+        }
+        else{
+            if(!hide_notes_pull & button_ids[i].includes("_"))
+                a.classList.remove("hidden");
+            if(!hide_notes_push & !button_ids[i].includes("_"))
+                a.classList.remove("hidden");
+        }
+    }
 }
 
 //######################
@@ -73,6 +93,7 @@ function toggleNote() {
 //######################
 
 function assignKeyboardLayout(layout, note_names) {
+    keyboardLayout = layout;
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
