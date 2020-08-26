@@ -1,8 +1,11 @@
 
 var root = document.documentElement;
-var colorPush;
+var colorPush; // change name to color_push
 var colorPull;
 var keyboardLayout;
+var accbtns_pull_hide_all = false; // bool
+var accbtns_push_hide_all = false; // bool
+var accbtns_visible = new Set(); 
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -10,19 +13,17 @@ function startup() {
   // push button
   var pushBtn = document.querySelector("#pushbtn");
   pushBtn.onclick = function() {
-    pushdivs = document.querySelectorAll(".push");
-    for (var i = 0; i < pushdivs.length; i++) {
-        pushdivs[i].classList.toggle("hidden");
-    }
+    this.classList.toggle("hidden");
+    window.accbtns_push_hide_all = !window.accbtns_push_hide_all;
+    refresh_visible_accbtns();
   };
 
   // pull button
   var pullBtn = document.querySelector("#pullbtn");
   pullBtn.onclick = function() {
-      pulldivs = document.querySelectorAll(".pull");
-      for (var i = 0; i < pulldivs.length; i++) {
-          pulldivs[i].classList.toggle("hidden");
-      }
+      this.classList.toggle("hidden");
+      window.accbtns_pull_hide_all = !window.accbtns_pull_hide_all;
+      refresh_visible_accbtns();
   }
 
   // Choose color for push buttons
@@ -46,13 +47,14 @@ function startup() {
   // load svg
   var svgObject = document.getElementById('svg_object').contentDocument;
   var svg = svgObject.getElementById('staff_short');
-  var btn_list = svgObject.querySelectorAll('rect[id^=btn]');
-  btn_list.forEach(btn => {
-      btn.addEventListener('click', toggleNote);
-     // btn.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
+  var rect_list = svgObject.querySelectorAll('rect[id^=btn]');
+  rect_list.forEach(rect => {
+      rect.addEventListener('click', toggleNote);
+     // rect.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
   });
-
-  //console.log(btn_list);
+  rect_list[2].dispatchEvent(new Event('click'));
+  rect_list[4].dispatchEvent(new Event('click'));
+  // refresh_visible_accbtns();
 }
 
 //######################
@@ -60,8 +62,6 @@ function startup() {
 //######################
 
 function toggleNote() {
-    var hide_notes_pull = document.querySelector("#pullbtn").classList.contains("hidden");
-    var hide_notes_push = document.querySelector("#pushbtn").classList.contains("hidden");
     if(this.getAttributeNS(null, 'style').includes('opacity:0.3')){
         var hide_note = true;
         this.setAttributeNS(null, 'style', 'opacity:0%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
@@ -73,17 +73,42 @@ function toggleNote() {
     var note_with_oct = this.getAttributeNS(null, 'id').slice(4); // note with octave specification in scientific pitch notation, i.e. f4_flat
     var note_no_oct = note_with_oct.replace(/[0-9]/g, ''); // note without octave specification, i.e. f_flat
     var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_no_oct);
-    for (let i = 0; i < button_ids.length; i++) {
-        var a = document.getElementById(button_ids[i]);
-        console.log(hide_note);
-        if(hide_note){
-            a.classList.add("hidden")
+    if(hide_note){
+        for (let i = 0; i < button_ids.length; i++) {
+            window.accbtns_visible.delete(button_ids[i]);
+        }
+    }
+    else{
+        for (let i = 0; i < button_ids.length; i++) {
+            window.accbtns_visible.add(button_ids[i]);
+        }
+    }
+    refresh_visible_accbtns();
+}
+
+function refresh_visible_accbtns() {
+    var accbtns_push = document.querySelector('#keyboard').querySelectorAll('div.push');
+    for(var i = 0; i < accbtns_push.length; i++){
+        if(window.accbtns_push_hide_all){
+            accbtns_push[i].classList.add("hidden");
+        }
+        else if(window.accbtns_visible.has(accbtns_push[i].id)){
+            accbtns_push[i].classList.remove("hidden");
         }
         else{
-            if(!hide_notes_pull & button_ids[i].includes("_"))
-                a.classList.remove("hidden");
-            if(!hide_notes_push & !button_ids[i].includes("_"))
-                a.classList.remove("hidden");
+            accbtns_push[i].classList.add("hidden");
+        }
+    }
+    var accbtns_pull = document.querySelector('#keyboard').querySelectorAll('div.pull');
+    for(var i = 0; i < accbtns_pull.length; i++){
+        if(window.accbtns_pull_hide_all){
+            accbtns_pull[i].classList.add("hidden");
+        }
+        else if(window.accbtns_visible.has(accbtns_pull[i].id)){
+            accbtns_pull[i].classList.remove("hidden");
+        }
+        else{
+            accbtns_pull[i].classList.add("hidden");
         }
     }
 }
