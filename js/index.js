@@ -64,11 +64,11 @@ function startup() {
 function toggleNote() {
     if(this.getAttributeNS(null, 'style').includes('opacity:0.3')){
         var hide_note = true;
-        this.setAttributeNS(null, 'style', 'opacity:0%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        this.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
     }
     else if(this.getAttributeNS(null, 'style').includes('opacity:0%')){
         var hide_note = false;
-        this.setAttributeNS(null, 'style', 'opacity:0.3;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        this.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
     }
     var note_with_oct = this.getAttributeNS(null, 'id').slice(4); // note with octave specification in scientific pitch notation, i.e. f4_flat
     var note_no_oct = note_with_oct.replace(/[0-9]/g, ''); // note without octave specification, i.e. f_flat
