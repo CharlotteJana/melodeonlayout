@@ -1,11 +1,15 @@
+// Lokale Testumgebung erstellen: python3 -m http.server
+// In Firefox öffnen: http://localhost:8000/Programme/cordova/workshop/www/
 
 var root = document.documentElement;
+var svgObject;
 var colorPush; // change name to color_push
 var colorPull;
 var keyboardLayout;
+var accbtns_visible = new Set(); 
 var accbtns_pull_hide_all = false; // bool
 var accbtns_push_hide_all = false; // bool
-var accbtns_visible = new Set(); 
+var option_no_oct; // bool, if true: no differentiation between octaves
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -33,7 +37,7 @@ function startup() {
   }, false);
   colorPush.select();
 
-  // Choose color for pull buttons
+  // choose color for pull buttons
   colorPull = document.querySelector("#color_pull");
   colorPull.addEventListener("input", function(){
     root.style.setProperty('--color-pull',colorPull.value);
@@ -44,10 +48,16 @@ function startup() {
   var note_names = window[document.querySelector('#language').value];
   assignKeyboardLayout(GC_3_heim, note_names);
 
+  // accordeon buttons
+  var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
+  accbtns.forEach(accbtn => {
+      accbtn.addEventListener('click', toggleNote);
+      // accbtn.addEventListener('touch', toggleNote);
+  })
+
   // load svg
-  var svgObject = document.getElementById('svg_object').contentDocument;
-  var svg = svgObject.getElementById('staff_short');
-  var rect_list = svgObject.querySelectorAll('rect[id^=btn]');
+  svgObject = document.getElementById('svg_object').contentDocument;
+  var rect_list = svgObject.querySelectorAll('rect');
   rect_list.forEach(rect => {
       rect.addEventListener('click', toggleNote);
      // rect.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
@@ -62,23 +72,43 @@ function startup() {
 //######################
 
 function toggleNote() {
-    if(this.getAttributeNS(null, 'style').includes('opacity:0.3')){
-        var hide_note = true;
-        this.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+    var hide_note; // bool
+    var note_with_oct; // note with octave specification in scientific pitch notation, i.e. f4_flat
+    var note_no_oct; // note without octave specification, i.e. f_flat
+
+    if(this.tagName.toLowerCase() == "rect"){
+        var rect = this;
+        note_with_oct = rect.getAttributeNS(null, 'id');
+        if(rect.getAttributeNS(null, 'style').includes('opacity:0%')){
+            hide_note = false;
+        }  
+        if(rect.getAttributeNS(null, 'style').includes('opacity:0.3')){
+            hide_note = true;
+        }
     }
-    else if(this.getAttributeNS(null, 'style').includes('opacity:0%')){
-        var hide_note = false;
-        this.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+    else if(this.tagName.toLowerCase() == "div"){
+        note_with_oct = window.keyboardLayout[this.id];
+        rect = svgObject.getElementById(note_with_oct);
+        if(rect == null){
+            return(false);
+        }
+        if(this.classList.contains("hidden")){
+            hide_note = false;
+        }
+        else{
+            hide_note = true;
+        }
     }
-    var note_with_oct = this.getAttributeNS(null, 'id').slice(4); // note with octave specification in scientific pitch notation, i.e. f4_flat
-    var note_no_oct = note_with_oct.replace(/[0-9]/g, ''); // note without octave specification, i.e. f_flat
-    var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_no_oct);
+    //note_no_oct = note_with_oct.replace(/[0-9]/g, '');
+    var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_with_oct);
     if(hide_note){
+        rect.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.delete(button_ids[i]);
         }
     }
     else{
+        rect.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.add(button_ids[i]);
         }
@@ -122,7 +152,7 @@ function assignKeyboardLayout(layout, note_names) {
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
-                document.getElementById(x).innerHTML = note_names[layout[x]];
+                document.getElementById(x).innerHTML = note_names[layout[x].replace(/[0-9]/g, '')];
             }
             catch (e) {continue}
         }
