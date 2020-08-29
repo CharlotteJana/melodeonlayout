@@ -3,10 +3,12 @@
 
 var root = document.documentElement;
 var svgObject;
+var svgSingle;
 var colorPush; // change name to color_push
 var colorPull;
-var keyboardLayout;
-var accbtns_visible = new Set(); 
+var keyboardLayout = new Array();
+var accbtns_visible = new Set();
+var notes_visible = new Set(); 
 var accbtns_pull_hide_all = false; // bool
 var accbtns_push_hide_all = false; // bool
 var option_no_oct; // bool, if true: no differentiation between octaves
@@ -55,8 +57,9 @@ function startup() {
       // accbtn.addEventListener('touch', toggleNote);
   })
 
-  // load svg
-  svgObject = document.getElementById('svg_object').contentDocument;
+  // load svgs
+  svgSingle = document.getElementById('svg_single').contentDocument; // Todo: Namen ändern
+  svgObject = document.getElementById('svg_object').contentDocument; // Todo: Namen ändern
   var rect_list = svgObject.querySelectorAll('rect');
   rect_list.forEach(rect => {
       rect.addEventListener('click', toggleNote);
@@ -89,9 +92,6 @@ function toggleNote() {
     else if(this.tagName.toLowerCase() == "div"){
         note_with_oct = window.keyboardLayout[this.id];
         rect = svgObject.getElementById(note_with_oct);
-        if(rect == null){
-            return(false);
-        }
         if(this.classList.contains("hidden")){
             hide_note = false;
         }
@@ -102,13 +102,19 @@ function toggleNote() {
     //note_no_oct = note_with_oct.replace(/[0-9]/g, '');
     var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_with_oct);
     if(hide_note){
-        rect.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        window.notes_visible.delete(note_with_oct);
+        if(rect != null){
+            rect.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        }
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.delete(button_ids[i]);
         }
     }
     else{
-        rect.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        window.notes_visible.add(note_with_oct);
+        if(rect != null){
+            rect.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        }
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.add(button_ids[i]);
         }
@@ -117,6 +123,27 @@ function toggleNote() {
 }
 
 function refresh_visible_accbtns() {
+
+    // refresh notes and accidentals in svgSingle
+    var single_notes = svgSingle.querySelectorAll('ellipse');
+    var accidentals = svgSingle.querySelectorAll("text[id$='flat'], text[id$='sharp']");
+    single_notes.forEach(note => {
+        note.setAttributeNS(null, 'style', 'opacity:0%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.29999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+    })
+    accidentals.forEach(accidental => {
+        accidental.setAttributeNS(null, 'style', "opacity:0%;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.11989784px;line-height:125.99999905%;font-family:'Linux Biolinum';-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1");
+    })
+    notes_visible.forEach(note => {
+        console.log(note);
+        var ellipse = svgSingle.querySelector('ellipse[id^='.concat(note.substr(0,2)));
+        ellipse.setAttributeNS(null, 'style', 'opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.29999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        if(note.length > 2){ // note with accidentals
+            var accidental = svgSingle.querySelector('text[id='.concat(note));
+            accidental.setAttributeNS(null, 'style', "opacity:1;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.11989784px;line-height:125.99999905%;font-family:'Linux Biolinum';-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1");
+        }
+    })
+
+    // refresh push buttons
     var accbtns_push = document.querySelector('#keyboard').querySelectorAll('div.push');
     for(var i = 0; i < accbtns_push.length; i++){
         if(window.accbtns_push_hide_all){
@@ -129,6 +156,8 @@ function refresh_visible_accbtns() {
             accbtns_push[i].classList.add("hidden");
         }
     }
+
+    // refresh pull buttons
     var accbtns_pull = document.querySelector('#keyboard').querySelectorAll('div.pull');
     for(var i = 0; i < accbtns_pull.length; i++){
         if(window.accbtns_pull_hide_all){
