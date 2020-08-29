@@ -1,5 +1,6 @@
 // Lokale Testumgebung erstellen: python3 -m http.server
-// In Firefox öffnen: http://localhost:8000/Programme/cordova/workshop/www/
+// Open in Firefox: http://localhost:8000/Programme/cordova/workshop/www/
+// Clean svg with https://jakearchibald.github.io/svgomg/
 
 var root = document.documentElement;
 var svgObject;
@@ -66,13 +67,27 @@ function startup() {
      // rect.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
   });
   rect_list[2].dispatchEvent(new Event('click'));
-  rect_list[4].dispatchEvent(new Event('click'));
+  rect_list[6].dispatchEvent(new Event('click'));
+  rect_list[9].dispatchEvent(new Event('click'));
   // refresh_visible_accbtns();
 }
 
 //######################
 //    svg (staff)
 //######################
+
+function setStyle(object, property, value) {
+    var oldStyle = object.getAttributeNS(null, 'style');
+    var regexp = new RegExp("(^|;)"+property+"\:([^;]+)($|;)(.*)$", "g"); //(.*^|;)
+    var newStyle;
+    if(oldStyle.match(regexp) != null){
+        newStyle = oldStyle.replace(regexp, "$1"+property+"\:"+value+"$3$4");
+    }
+    else{
+        newStyle = oldStyle+";"+property+":"+value;
+    }
+    object.setAttributeNS(null, 'style', newStyle);
+}
 
 function toggleNote() {
     var hide_note; // bool
@@ -104,7 +119,7 @@ function toggleNote() {
     if(hide_note){
         window.notes_visible.delete(note_with_oct);
         if(rect != null){
-            rect.setAttributeNS(null, 'style', 'opacity:0%;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+            setStyle(rect, "opacity", "0%");
         }
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.delete(button_ids[i]);
@@ -113,7 +128,7 @@ function toggleNote() {
     else{
         window.notes_visible.add(note_with_oct);
         if(rect != null){
-            rect.setAttributeNS(null, 'style', 'opacity:0.3;cursor:pointer;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79621941;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+            setStyle(rect, "opacity", "0.3");
         }
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.add(button_ids[i]);
@@ -128,18 +143,17 @@ function refresh_visible_accbtns() {
     var single_notes = svgSingle.querySelectorAll('ellipse');
     var accidentals = svgSingle.querySelectorAll("text[id$='flat'], text[id$='sharp']");
     single_notes.forEach(note => {
-        note.setAttributeNS(null, 'style', 'opacity:0%;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.29999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        setStyle(note, "opacity", "0%");
     })
     accidentals.forEach(accidental => {
-        accidental.setAttributeNS(null, 'style', "opacity:0%;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.11989784px;line-height:125.99999905%;font-family:'Linux Biolinum';-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1");
+        setStyle(accidental, "opacity", "0%");
     })
     notes_visible.forEach(note => {
-        console.log(note);
         var ellipse = svgSingle.querySelector('ellipse[id^='.concat(note.substr(0,2)));
-        ellipse.setAttributeNS(null, 'style', 'opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.29999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1');
+        setStyle(ellipse, "opacity", "1");
         if(note.length > 2){ // note with accidentals
             var accidental = svgSingle.querySelector('text[id='.concat(note));
-            accidental.setAttributeNS(null, 'style', "opacity:1;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.11989784px;line-height:125.99999905%;font-family:'Linux Biolinum';-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1");
+            setStyle(accidental, "opacity", "1");
         }
     })
 
