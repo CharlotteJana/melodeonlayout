@@ -78,7 +78,7 @@ function startup() {
 
 function setStyle(object, property, value) {
     var oldStyle = object.getAttributeNS(null, 'style');
-    var regexp = new RegExp("(^|;)"+property+"\:([^;]+)($|;)(.*)$", "g"); //(.*^|;)
+    var regexp = new RegExp("(^|;)"+property+"\:([^;]+)($|;)(.*)$", "g");
     var newStyle;
     if(oldStyle.match(regexp) != null){
         newStyle = oldStyle.replace(regexp, "$1"+property+"\:"+value+"$3$4");
@@ -140,7 +140,7 @@ function toggleNote() {
 function refresh_visible_accbtns() {
 
     // refresh notes and accidentals in svgSingle
-    var single_notes = svgSingle.querySelectorAll('ellipse');
+    var single_notes = svgSingle.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
     var accidentals = svgSingle.querySelectorAll("text[id$='flat'], text[id$='sharp']");
     single_notes.forEach(note => {
         setStyle(note, "opacity", "0%");
@@ -149,8 +149,8 @@ function refresh_visible_accbtns() {
         setStyle(accidental, "opacity", "0%");
     })
     notes_visible.forEach(note => {
-        var ellipse = svgSingle.querySelector('ellipse[id^='.concat(note.substr(0,2)));
-        setStyle(ellipse, "opacity", "1");
+        var note = svgSingle.querySelector('path[id^='.concat(note.substr(0,2)));
+        setStyle(note, "opacity", "1");
         if(note.length > 2){ // note with accidentals
             var accidental = svgSingle.querySelector('text[id='.concat(note));
             setStyle(accidental, "opacity", "1");
