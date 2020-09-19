@@ -1,4 +1,4 @@
-// Lokale Testumgebung erstellen: python3 -m http.server
+// Create local server: python3 -m http.server
 // Open in Firefox: http://localhost:8000/Programme/cordova/workshop/www/
 // Clean svg with https://jakearchibald.github.io/svgomg/
 
@@ -70,6 +70,9 @@ function startup() {
   rect_list[6].dispatchEvent(new Event('click'));
   rect_list[9].dispatchEvent(new Event('click'));
   // refresh_visible_accbtns();
+
+  // only show melody tab
+  document.getElementById('righthandTab').dispatchEvent(new Event('click'));
 }
 
 //######################
@@ -306,14 +309,21 @@ function adjustKeys(direction) {
     }
 }
 
-function toggleSettings() {
-    var x = document.getElementById("settings");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  } 
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    var tabs = document.querySelector('#tabmenu').querySelectorAll('.tabbttn');
+    tabs.forEach(tab => {
+        tab.classList.remove("active");
+    })
+
+    var tabcontent = document.querySelectorAll('.tabcontent');
+    tabcontent.forEach(content => {
+        content.style.display = "none";
+    })
+
+    document.getElementById(tabName).style.display = "flex";
+    evt.currentTarget.classList.add("active");
+  }
 
 function showRows(number) {
     var row3buttons = document.getElementById("row 3").children

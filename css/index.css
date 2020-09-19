@@ -15,12 +15,18 @@ object {
    align-items: center;
 }
 
+.row-with-space {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   flex-wrap : wrap
+}
+
 .button {
    display: flex;
    flex-direction: column;
    margin: 0.3vw;
    width: var(--button-size); 
-   border: 1px solid rgb(226, 48, 48);
    border: none;
 }
 
@@ -56,14 +62,6 @@ object {
 
 .ppbutton {
    cursor: pointer;
-}
-
-.settingbtn {
-   --button-size: 40px;
-   --half-button-size: calc(var(--button-size) / 2);
-   width: var(--button-size);
-   height: var(--button-size);
-   display: flex;
 }
 
 #ppdiv {
@@ -106,4 +104,23 @@ object {
  rect {
    cursor: pointer;
    fill: blue;
+ }
+ 
+ .tabcontent {
+   display: none;
+   /*padding: 6px 12px;*/
+   border: 1px solid #0f0f0f;
+   border-top: none;
+ }
+
+ .tabbttn {
+   display: flex;
+   flex-direction: column;
+   width: var(--button-size); 
+   border: none;
+   background-color: #ffffff;
+ }
+
+ .active {
+   background-color: #e4e4e4;
  }
