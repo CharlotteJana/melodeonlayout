@@ -3,6 +3,8 @@
    --half-button-size: calc(var(--button-size) / 2);
    --color-push: #379D1F;
    --color-pull: #ADEE50;
+   --color-foreground: #dadada;
+   --color-background: #ffffff;
 }
 
 object {
@@ -49,8 +51,8 @@ object {
 }
 
 .hidden {
-   background-color: white;
-   color: white;
+   background-color: var(--color-background);
+   color: var(--color-background);
 }
 
 .keyboard {
@@ -109,18 +111,20 @@ object {
  .tabcontent {
    display: none;
    /*padding: 6px 12px;*/
-   border: 1px solid #0f0f0f;
-   border-top: none;
+   background-color: var(--color-foreground);
  }
 
  .tabbttn {
    display: flex;
    flex-direction: column;
    width: var(--button-size); 
-   border: none;
-   background-color: #ffffff;
+   border: 1px solid var(--color-foreground);
+   border-bottom: none;
+   background-color: var(--color-background);
  }
 
  .active {
-   background-color: #e4e4e4;
+   background-color: var(--color-foreground);
+   border: 1px solid var(--color-foreground);
+   border-bottom: none;
  }
