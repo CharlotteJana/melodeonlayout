@@ -30,10 +30,10 @@ object {
    margin: 0.3vw;
    width: var(--button-size); 
    border: none;
+   text-align: center;
 }
 
 .push, .pull {
-   text-align: center;
    vertical-align: middle;
    border: 1px solid black;
 }

@@ -7,7 +7,8 @@ var svgObject;
 var svgSingle;
 var colorPush; // change name to color_push
 var colorPull;
-var keyboardLayout = new Array();
+var keyboard_lefthand = new Array();
+var keyboard_righthand = new Array();
 var accbtns_visible = new Set();
 var notes_visible = new Set(); 
 var accbtns_pull_hide_all = false; // bool
@@ -49,7 +50,8 @@ function startup() {
 
   // load KeyboardLayout
   var note_names = window[document.querySelector('#language').value];
-  assignKeyboardLayout(GC_3_heim, note_names);
+  assignKeyboardLayout("right", GC_3_heim, note_names);
+  assignKeyboardLayout("left", GC_18, note_names);
 
   // accordeon buttons
   var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
@@ -108,7 +110,7 @@ function toggleNote() {
         }
     }
     else if(this.tagName.toLowerCase() == "div"){
-        note_with_oct = window.keyboardLayout[this.id];
+        note_with_oct = window.keyboard_righthand[this.id];
         rect = svgObject.getElementById(note_with_oct);
         if(this.classList.contains("hidden")){
             hide_note = false;
@@ -118,7 +120,9 @@ function toggleNote() {
         }
     }
     //note_no_oct = note_with_oct.replace(/[0-9]/g, '');
-    var button_ids = Object.keys(window.keyboardLayout).filter(key => window.keyboardLayout[key] === note_with_oct);
+    var button_ids = Object.keys(window.keyboard_righthand).filter(
+        key => window.keyboard_righthand[key] === note_with_oct
+    );
     if(hide_note){
         window.notes_visible.delete(note_with_oct);
         if(rect != null){
@@ -193,12 +197,25 @@ function refresh_visible_accbtns() {
 //     settings
 //######################
 
-function assignKeyboardLayout(layout, note_names) {
-    keyboardLayout = layout;
+function assignKeyboardLayout(hand, layout, note_names) {
+    if(hand == "right"){
+        keyboard_righthand = layout;
+    }
+    else if(hand == "left"){
+        keyboard_lefthand = layout;
+    }
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
-                document.getElementById(x).innerHTML = note_names[layout[x].replace(/[0-9]/g, '')];
+                if(layout[x].match('major')){
+                    document.getElementById(x).innerHTML = "+";
+                }
+                else if(layout[x].match('minor')){
+                    document.getElementById(x).innerHTML = "-";
+                }
+                else{
+                    document.getElementById(x).innerHTML = note_names[layout[x].replace(/[0-9]/g, '')];
+                }
             }
             catch (e) {continue}
         }
