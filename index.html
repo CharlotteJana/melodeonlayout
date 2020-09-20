@@ -337,10 +337,19 @@
                     <label for="color_pull">Farbe Ziehen: </label>
                     <input type="color" value="#ADEE50" id="color_pull">
                 </form>
-                <p>
-                    Ausrichtung des Griffbretts: 
-                    <button onclick="rotateKeyboard()">↻­­­­</button>
-                </p>
+                <p>Ausrichtung des Griffbretts: </p>
+                <button class="ausrichtung" onclick="rotateKeyboard()">
+                    <img src="./img/accordion.png">
+                ­­­­</button>
+                <button class="ausrichtung" onclick="rotateKeyboard()">
+                    <img src="./img/accordion.png" style="transform: rotate(90deg);">
+                ­­­­</button>
+                <button class="ausrichtung" onclick="rotateKeyboard()">
+                    <img src="./img/accordion.png" style="transform: rotate(180deg);">
+                ­­­­</button> 
+                <button class="ausrichtung" onclick="rotateKeyboard()">
+                    <img src="./img/accordion.png" style="transform: rotate(-90deg);">
+                ­­­­</button>
                 <p>
                     Ausrichtung der Tasten:
                     <div class="row">
