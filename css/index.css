@@ -1,5 +1,5 @@
 :root {
-   --button-size: 7vw; 
+   --button-size: 6.5vw; 
    --half-button-size: calc(var(--button-size) / 2);
    --color-push: #379D1F;
    --color-pull: #ADEE50;
@@ -7,8 +7,32 @@
    --color-background: #ffffff;
 }
 
-object {
+body {
+   display: flex;
+   flex-direction: column;
+   justify-content : space-between;
+}
+
+#core {
+   flex-grow: 3;
+   width: calc(13.5*var(--button-size));
+}
+
+#ppdiv {
+   display: flex;
+   flex-direction: column;
+}
+
+#svg_octave_ignore {
    height: var(--button-size);
+}
+
+#svg_octave_diff {
+   width: var(--button-size);
+}
+
+#menuLine {
+   padding: calc(0.25 * var(--button-size));
 }
 
 .row {
@@ -36,6 +60,7 @@ object {
 .push, .pull {
    vertical-align: middle;
    border: 1px solid black;
+   cursor: pointer;
 }
 
 .push {
@@ -64,15 +89,6 @@ object {
    display: flex;
    flex-direction: column;
    align-items: flex-start; 
-}
-
-.ppbutton {
-   cursor: pointer;
-}
-
-#ppdiv {
-   display: flex;
-   flex-direction: column;
 }
 
  .top {
@@ -114,7 +130,7 @@ object {
  
  .tabcontent {
    display: none;
-   /*padding: 6px 12px;*/
+   padding: 10px;
    background-color: var(--color-foreground);
  }
 

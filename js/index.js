@@ -88,11 +88,15 @@ function optionOctave(){
         console.log("diff");
         document.querySelector('#staff_octave_ignore').classList.add("hide_staff");
         document.querySelector('#staff_octave_diff').classList.remove("hide_staff");
+        document.querySelector('body').style.flexDirection = "row-reverse";
+        document.querySelector('#menuLine').style.flexDirection = "column";
     }
     else if (option_octave == 'ignore'){
         console.log("ignore");
         document.querySelector('#staff_octave_ignore').classList.remove("hide_staff");
         document.querySelector('#staff_octave_diff').classList.add("hide_staff");
+        document.querySelector('body').style.flexDirection = "column";
+        document.querySelector('#menuLine').style.flexDirection = "row";
     }
 }
 
