@@ -13,14 +13,18 @@
                 <div id="pullbtn" class="pull bottom ppbutton">⯬▥⯮</div>
             </div> 
             <div class="empty button" style="width: calc(0.5 * var(--button-size))"></div>
-            <object data="./img/staff_short.svg" type="image/svg+xml" id="svg_object">
-                <!---Fallback--->
-                Ihr Browser kann leider kein Svg darstellen. 
-            </object>
-            <object data="./img/staff_single.svg" type="image/svg+xml" id="svg_single">
-                <!---Fallback--->
-                Ihr Browser kann leider kein Svg darstellen. 
-            </object>
+            <div id="staff_octave_ignore">
+                <object data="./img/staff_short.svg" type="image/svg+xml" id="svg_octave_ignore">
+                    <!---Fallback--->
+                    Ihr Browser kann leider kein Svg darstellen. 
+                </object>
+            </div>
+            <div id="staff_octave_diff">
+                <object data="./img/staff_single.svg" type="image/svg+xml" id="svg_octave_diff">
+                    <!---Fallback--->
+                    Ihr Browser kann leider kein Svg darstellen. 
+                </object>
+            </div>
         </div>
         <div id="tabmenu" class="row">
             <button id="lefthandTab" class="tabbttn" onclick="openTab(event, 'lefthand')"><span style="transform: rotate(90deg) scaleX(-1)">🖐</span></button>
@@ -318,7 +322,12 @@
             </div>
             <div>
             <p><b>Aussehen & Verhalten</b></p>
-            <p>Beachte Oktavierungen</p>
+            <p>Oktavierungen:
+                <input type="radio" id="octave_diff" name="octave" value="diff" onclick="optionOctave();">
+                <label for="octave_diff"> Unterscheiden</label>
+                <input type="radio" id="octave_ignore" name="octave" value="ignore" checked onclick="optionOctave();">
+                <label for="octave_ignore"> Ignorieren</label>
+            </p>
             <form>
                 <label for="color_push">Farbe Schieben: </label>
                 <input type="color" value="#379D1F" id="color_push">

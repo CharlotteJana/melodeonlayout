@@ -50,9 +50,13 @@ object {
    text-align: left;
 }
 
-.hidden {
+.hidden { /* for accordeon buttons */
    background-color: var(--color-background);
    color: var(--color-background);
+}
+
+.hide_staff { /* for staff */
+   display: none;
 }
 
 .keyboard {

@@ -3,8 +3,9 @@
 // Clean svg with https://jakearchibald.github.io/svgomg/
 
 var root = document.documentElement;
-var svgObject;
-var svgSingle;
+var svgOctaveIgnore;
+var svgOctaveDiff;
+var option_octave; // string, 2 values: 'diff' (differentiation between octaves) or 'ignore' (no differentiation)
 var colorPush; // change name to color_push
 var colorPull;
 var keyboard_lefthand = new Array();
@@ -13,7 +14,6 @@ var accbtns_visible = new Set();
 var notes_visible = new Set(); 
 var accbtns_pull_hide_all = false; // bool
 var accbtns_push_hide_all = false; // bool
-var option_no_oct; // bool, if true: no differentiation between octaves
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -52,7 +52,6 @@ function startup() {
   var note_names = window[document.querySelector('#language').value];
   assignKeyboardLayout(GC_3_heim, note_names, "right");
   assignKeyboardLayout(GC_18, note_names, "left");
-  console.log("fertig");
 
   // accordeon buttons
   var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
@@ -62,13 +61,14 @@ function startup() {
   })
 
   // load svgs
-  svgSingle = document.getElementById('svg_single').contentDocument; // Todo: Namen ändern
-  svgObject = document.getElementById('svg_object').contentDocument; // Todo: Namen ändern
-  var rect_list = svgObject.querySelectorAll('rect');
+  svgOctaveDiff = document.getElementById('svg_octave_diff').contentDocument; // Todo: Namen ändern
+  svgOctaveIgnore = document.getElementById('svg_octave_ignore').contentDocument; // Todo: Namen ändern
+  var rect_list = svgOctaveIgnore.querySelectorAll('rect');
   rect_list.forEach(rect => {
       rect.addEventListener('click', toggleNote);
      // rect.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
   });
+  optionOctave();
   rect_list[2].dispatchEvent(new Event('click'));
   rect_list[6].dispatchEvent(new Event('click'));
   rect_list[9].dispatchEvent(new Event('click'));
@@ -81,6 +81,20 @@ function startup() {
 //######################
 //    svg (staff)
 //######################
+
+function optionOctave(){
+    option_octave = document.querySelector('input[name="octave"]:checked').value;
+    if(option_octave == 'diff'){
+        console.log("diff");
+        document.querySelector('#staff_octave_ignore').classList.add("hide_staff");
+        document.querySelector('#staff_octave_diff').classList.remove("hide_staff");
+    }
+    else if (option_octave == 'ignore'){
+        console.log("ignore");
+        document.querySelector('#staff_octave_ignore').classList.remove("hide_staff");
+        document.querySelector('#staff_octave_diff').classList.add("hide_staff");
+    }
+}
 
 function setStyle(object, property, value) {
     var oldStyle = object.getAttributeNS(null, 'style');
@@ -112,7 +126,7 @@ function toggleNote() {
     }
     else if(this.tagName.toLowerCase() == "div"){
         note_with_oct = window.keyboard_righthand[this.id];
-        rect = svgObject.getElementById(note_with_oct);
+        rect = svgOctaveIgnore.getElementById(note_with_oct);
         if(this.classList.contains("hidden")){
             hide_note = false;
         }
@@ -147,9 +161,9 @@ function toggleNote() {
 
 function refresh_visible_accbtns() {
 
-    // refresh notes and accidentals in svgSingle
-    var single_notes = svgSingle.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
-    var accidentals = svgSingle.querySelectorAll("text[id$='flat'], text[id$='sharp']");
+    // refresh notes and accidentals in svgOctaveDiff
+    var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
+    var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
     single_notes.forEach(note => {
         setStyle(note, "opacity", "0%");
     })
@@ -157,10 +171,10 @@ function refresh_visible_accbtns() {
         setStyle(accidental, "opacity", "0%");
     })
     notes_visible.forEach(note => {
-        var note = svgSingle.querySelector('path[id^='.concat(note.substr(0,2)));
+        var note = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
         setStyle(note, "opacity", "1");
         if(note.length > 2){ // note with accidentals
-            var accidental = svgSingle.querySelector('text[id='.concat(note));
+            var accidental = svgOctaveDiff.querySelector('text[id='.concat(note));
             setStyle(accidental, "opacity", "1");
         }
     })
