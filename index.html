@@ -27,7 +27,7 @@
             <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')">Melodie</button>            
             <button id="settingsTab" class="tabbttn" onclick="openTab(event, 'settings')">≡</button>
           </div>
-          <div id="lefthand" class="tabcontent">
+        <div id="lefthand" class="tabcontent">
             <div id="bassboard" class="keyboard">
                 <div id="bassrow 3" class="row">
                     <div class="button">
@@ -279,7 +279,7 @@
             <div>
             <p><b>Tastenbelegung</b></p>
             <p> Sprache:
-                <select id="language" onChange="assignKeyboardLayout(GC_3_heim, window[this.value])">
+                <select id="language" onChange="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value])">
                 <option value="german">Deutsch</option>
                 <option value="english">English</option>
                 <option value="french">Français</option>

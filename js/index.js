@@ -50,8 +50,9 @@ function startup() {
 
   // load KeyboardLayout
   var note_names = window[document.querySelector('#language').value];
-  assignKeyboardLayout("right", GC_3_heim, note_names);
-  assignKeyboardLayout("left", GC_18, note_names);
+  assignKeyboardLayout(GC_3_heim, note_names, "right");
+  assignKeyboardLayout(GC_18, note_names, "left");
+  console.log("fertig");
 
   // accordeon buttons
   var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
@@ -197,12 +198,12 @@ function refresh_visible_accbtns() {
 //     settings
 //######################
 
-function assignKeyboardLayout(hand, layout, note_names) {
+function assignKeyboardLayout(layout, note_names, hand = null) {
     if(hand == "right"){
-        keyboard_righthand = layout;
+        window.keyboard_righthand = layout;
     }
     else if(hand == "left"){
-        keyboard_lefthand = layout;
+        window.keyboard_lefthand = layout;
     }
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
