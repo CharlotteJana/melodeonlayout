@@ -117,45 +117,82 @@ function toggleNote() {
     var hide_note; // bool
     var note_with_oct; // note with octave specification in scientific pitch notation, i.e. f4_flat
     var note_no_oct; // note without octave specification, i.e. f_flat
+    var button_ids = new Array();
+    var note_names = new Set();
 
-    if(this.tagName.toLowerCase() == "rect"){
-        var rect = this;
-        note_with_oct = rect.getAttributeNS(null, 'id');
-        if(rect.getAttributeNS(null, 'style').includes('opacity:0%')){
-            hide_note = false;
-        }  
-        if(rect.getAttributeNS(null, 'style').includes('opacity:0.3')){
-            hide_note = true;
+    // ######### definition of variables "note_with_oct" and "hide_note" ##########
+
+        // case: a rectangle in svgOctaveIgnore has been clicked
+        if(this.tagName.toLowerCase() == "rect"){
+            var rect = this;
+            note_with_oct = rect.getAttributeNS(null, 'id'); 
+            if(rect.getAttributeNS(null, 'style').includes('opacity:0%')){
+                hide_note = false;
+            }  
+            if(rect.getAttributeNS(null, 'style').includes('opacity:0.3')){
+                hide_note = true;
+            }
+        /* var button_ids = Object.keys(window.keyboard_righthand).filter(
+                key => window.keyboard_righthand[key].replace(/[0-9]/g, '') === note_no_oct
+            );
+            var notes_with_oct = Object.entries(window.keyboard_righthand).filter(
+                key => window.keyboard_righthand[key].replace(/[0-9]/g, '') === note_no_oct 
+            )*/
         }
+        // case: an accordeon button has been clicked
+        else if(this.tagName.toLowerCase() == "div"){
+            note_with_oct = window.keyboard_righthand[this.id]; 
+            rect = svgOctaveIgnore.getElementById(note_with_oct);
+            if(this.classList.contains("hidden")){
+                hide_note = false;
+            }
+            else{
+                hide_note = true;
+            }
+        }
+
+    // ######### definition of arrays "button_ids" and "note_names" ##########
+    if(option_octave == "diff"){
+        button_ids = Object.keys(window.keyboard_righthand).filter(
+            key => window.keyboard_righthand[key] === note_with_oct
+        );
+        note_names.add(note_with_oct);
     }
-    else if(this.tagName.toLowerCase() == "div"){
-        note_with_oct = window.keyboard_righthand[this.id];
-        rect = svgOctaveIgnore.getElementById(note_with_oct);
-        if(this.classList.contains("hidden")){
-            hide_note = false;
-        }
-        else{
-            hide_note = true;
-        }
+    else if (option_octave == "ignore"){
+        note_no_oct = note_with_oct.replace(/[0-9]/g, '');
+        Object.entries(window.keyboard_righthand).forEach(
+            ([key, value]) => {
+                if(value.replace(/[0-9]/g, '') == note_no_oct){
+                    button_ids.push(key);
+                    note_names.add(value);
+                } 
+            }
+        );
+       /* for (const [key, value] of Object.entries(window.keyboard_righthand)) {
+            if(${key}.replace(/[0-9]/g, '') == note_no_oct){
+                console.log(${value});
+                button_ids.push(${key});
+                note_names.push(${value});
+            }
+          }*/
     }
-    //note_no_oct = note_with_oct.replace(/[0-9]/g, '');
-    var button_ids = Object.keys(window.keyboard_righthand).filter(
-        key => window.keyboard_righthand[key] === note_with_oct
-    );
+
+    // ######### change values of "notes_visible" and "accbtns_visible" ##########
     if(hide_note){
-        window.notes_visible.delete(note_with_oct);
-        if(rect != null){
-            setStyle(rect, "opacity", "0%");
-        }
+        // delete elements of note_names from notes_visible
+        notes_visible = new Set([...notes_visible].filter(x => !note_names.has(x)));
+        //if(rect != null){
+        //    setStyle(rect, "opacity", "0%");
+        //}
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.delete(button_ids[i]);
         }
     }
     else{
-        window.notes_visible.add(note_with_oct);
-        if(rect != null){
-            setStyle(rect, "opacity", "0.3");
-        }
+        notes_visible = new Set([...notes_visible, ...note_names]);
+        //if(rect != null){
+        //    setStyle(rect, "opacity", "0.3");
+        //}
         for (let i = 0; i < button_ids.length; i++) {
             window.accbtns_visible.add(button_ids[i]);
         }
@@ -168,19 +205,31 @@ function refresh_visible_accbtns() {
     // refresh notes and accidentals in svgOctaveDiff
     var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
     var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
+    var rects_all = svgOctaveIgnore.querySelectorAll('rect');
     single_notes.forEach(note => {
         setStyle(note, "opacity", "0%");
     })
     accidentals.forEach(accidental => {
         setStyle(accidental, "opacity", "0%");
     })
+    rects_all.forEach(rect => {
+        setStyle(rect, "opacity", "0%");
+    })
     notes_visible.forEach(note => {
-        var note = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
-        setStyle(note, "opacity", "1");
-        if(note.length > 2){ // note with accidentals
+        var note_visible = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
+        setStyle(note_visible, "opacity", "1");
+        if(note.length > 2){ // note with accidentals 
             var accidental = svgOctaveDiff.querySelector('text[id='.concat(note));
             setStyle(accidental, "opacity", "1");
         }
+        var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note.substr(0,1)));
+        console.log(note.substr(0,1));
+        console.log(rects);
+        rects.forEach(rect => {
+            if(rect.id.replace(/[0-9]/g, '') == note.replace(/[0-9]/g, '')){
+                setStyle(rect, "opacity", "0.3");
+            }
+        })
     })
 
     // refresh push buttons
