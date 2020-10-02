@@ -70,12 +70,13 @@ function startup() {
   });
   optionOctave();
   rect_list[2].dispatchEvent(new Event('click'));
-  rect_list[6].dispatchEvent(new Event('click'));
-  rect_list[9].dispatchEvent(new Event('click'));
-  // refresh_visible_accbtns();
-
+  //rect_list[6].dispatchEvent(new Event('click'));
+  //rect_list[9].dispatchEvent(new Event('click'));
+  
   // only show melody tab
   document.getElementById('righthandTab').dispatchEvent(new Event('click'));
+
+  rotateKeyboard(4);
 }
 
 //######################
@@ -290,39 +291,38 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
     } 
 }
 
-var direction = 2;
-function rotateKeyboard() {
+function rotateKeyboard(direction) {
     var kb = document.querySelector("#keyboard");
-    var rows = document.querySelectorAll(".row");
+    var rows = document.querySelectorAll("#keyboard.row");
 
     switch (direction) {
-        case 0:
+        case 1: // melody: left, bass: right
             kb.style.flexDirection = "row";  
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "column";
             } 
             break;
-        case 1: // default variant
-            kb.style.flexDirection = "column";
+        case 2: // melody: top, bass: bottom
+            kb.style.flexDirection = "column-reverse";
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "row";
             }
             break;
-        case 2:
+        case 3: // melody: right, bass: left
             kb.style.flexDirection = "row-reverse";
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "column";
             }
             break;
-        case 3:
-            kb.style.flexDirection = "column-reverse";
+        case 4: // melody: bottom, bass: top
+            kb.style.flexDirection = "column";
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "row";
             }
             break;
     }
 
-    direction = (direction + 1) % 4; // possible values: 0, 1, 2, 3
+    // direction = (direction + 1) % 4; // possible values: 0, 1, 2, 3
 }
 
 // css display: https://codeburst.io/common-problems-in-positioning-elements-in-css-best-practices-b03ac54dbdcb
@@ -395,8 +395,7 @@ function adjustKeys(direction) {
 }
 
 function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    var tabs = document.querySelector('#tabmenu').querySelectorAll('.tabbttn');
+    /*var tabs = document.querySelector('#tabmenu').querySelectorAll('.tabbttn');
     tabs.forEach(tab => {
         tab.classList.remove("active");
     })
@@ -408,7 +407,18 @@ function openTab(evt, tabName) {
 
     document.getElementById(tabName).style.display = "flex";
     evt.currentTarget.classList.add("active");
+    */
+
+    if(evt.currentTarget.classList.contains("active")){
+        evt.currentTarget.classList.remove("active");
+        document.getElementById(tabName).style.display = "none";
+    }
+    else{
+        evt.currentTarget.classList.add("active");
+        document.getElementById(tabName).style.display = "flex";
+    }
   }
+
 
 function showRows(number) {
     var row3buttons = document.getElementById("row 3").children
