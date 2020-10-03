@@ -54,7 +54,8 @@ function startup() {
   assignKeyboardLayout(GC_18, note_names, "left");
 
   // accordeon buttons
-  var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
+  //var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
+  var accbtns = document.querySelectorAll('#keyboard .push, #keyboard .pull, #bassboard .push, #bassboard .pull');
   accbtns.forEach(accbtn => {
       accbtn.addEventListener('click', toggleNote);
       // accbtn.addEventListener('touch', toggleNote);
@@ -86,14 +87,12 @@ function startup() {
 function optionOctave(){
     option_octave = document.querySelector('input[name="octave"]:checked').value;
     if(option_octave == 'diff'){
-        console.log("diff");
         document.querySelector('#staff_octave_ignore').classList.add("hide_staff");
         document.querySelector('#staff_octave_diff').classList.remove("hide_staff");
         document.querySelector('body').style.flexDirection = "row-reverse";
         document.querySelector('#menuLine').style.flexDirection = "column";
     }
     else if (option_octave == 'ignore'){
-        console.log("ignore");
         document.querySelector('#staff_octave_ignore').classList.remove("hide_staff");
         document.querySelector('#staff_octave_diff').classList.add("hide_staff");
         document.querySelector('body').style.flexDirection = "column";
@@ -102,19 +101,23 @@ function optionOctave(){
 }
 
 function setStyle(object, property, value) {
-    var oldStyle = object.getAttributeNS(null, 'style');
-    var regexp = new RegExp("(^|;)"+property+"\:([^;]+)($|;)(.*)$", "g");
-    var newStyle;
-    if(oldStyle.match(regexp) != null){
-        newStyle = oldStyle.replace(regexp, "$1"+property+"\:"+value+"$3$4");
+    try{
+        var oldStyle = object.getAttributeNS(null, 'style');
+        var regexp = new RegExp("(^|;)"+property+"\:([^;]+)($|;)(.*)$", "g");
+        var newStyle;
+        if(oldStyle.match(regexp) != null){
+            newStyle = oldStyle.replace(regexp, "$1"+property+"\:"+value+"$3$4");
+        }
+        else{
+            newStyle = oldStyle+";"+property+":"+value;
+        }
+        object.setAttributeNS(null, 'style', newStyle);
     }
-    else{
-        newStyle = oldStyle+";"+property+":"+value;
-    }
-    object.setAttributeNS(null, 'style', newStyle);
+    catch (e) {}
 }
 
 function toggleNote() {
+    var keyboard = Object.assign({}, window.keyboard_lefthand, window.keyboard_righthand);
     var hide_note; // bool
     var note_with_oct; // note with octave specification in scientific pitch notation, i.e. f4_flat
     var note_no_oct; // note without octave specification, i.e. f_flat
@@ -142,7 +145,7 @@ function toggleNote() {
         }
         // case: an accordeon button has been clicked
         else if(this.tagName.toLowerCase() == "div"){
-            note_with_oct = window.keyboard_righthand[this.id]; 
+            note_with_oct = keyboard[this.id];
             rect = svgOctaveIgnore.getElementById(note_with_oct);
             if(this.classList.contains("hidden")){
                 hide_note = false;
@@ -154,14 +157,14 @@ function toggleNote() {
 
     // ######### definition of arrays "button_ids" and "note_names" ##########
     if(option_octave == "diff"){
-        button_ids = Object.keys(window.keyboard_righthand).filter(
-            key => window.keyboard_righthand[key] === note_with_oct
+        button_ids = Object.keys(keyboard).filter(
+            key => keyboard[key] === note_with_oct
         );
         note_names.add(note_with_oct);
     }
     else if (option_octave == "ignore"){
         note_no_oct = note_with_oct.replace(/[0-9]/g, '');
-        Object.entries(window.keyboard_righthand).forEach(
+        Object.entries(keyboard).forEach(
             ([key, value]) => {
                 if(value.replace(/[0-9]/g, '') == note_no_oct){
                     button_ids.push(key);
@@ -224,8 +227,6 @@ function refresh_visible_accbtns() {
             setStyle(accidental, "opacity", "1");
         }
         var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note.substr(0,1)));
-        console.log(note.substr(0,1));
-        console.log(rects);
         rects.forEach(rect => {
             if(rect.id.replace(/[0-9]/g, '') == note.replace(/[0-9]/g, '')){
                 setStyle(rect, "opacity", "0.3");
@@ -234,7 +235,7 @@ function refresh_visible_accbtns() {
     })
 
     // refresh push buttons
-    var accbtns_push = document.querySelector('#keyboard').querySelectorAll('div.push');
+    var accbtns_push = document.querySelectorAll('#keyboard div.push, #bassboard div.push');
     for(var i = 0; i < accbtns_push.length; i++){
         if(window.accbtns_push_hide_all){
             accbtns_push[i].classList.add("hidden");
@@ -248,7 +249,7 @@ function refresh_visible_accbtns() {
     }
 
     // refresh pull buttons
-    var accbtns_pull = document.querySelector('#keyboard').querySelectorAll('div.pull');
+    var accbtns_pull = document.querySelectorAll('#keyboard div.pull, #bassboard div.pull');
     for(var i = 0; i < accbtns_pull.length; i++){
         if(window.accbtns_pull_hide_all){
             accbtns_pull[i].classList.add("hidden");
@@ -395,20 +396,6 @@ function adjustKeys(direction) {
 }
 
 function openTab(evt, tabName) {
-    /*var tabs = document.querySelector('#tabmenu').querySelectorAll('.tabbttn');
-    tabs.forEach(tab => {
-        tab.classList.remove("active");
-    })
-
-    var tabcontent = document.querySelectorAll('.tabcontent');
-    tabcontent.forEach(content => {
-        content.style.display = "none";
-    })
-
-    document.getElementById(tabName).style.display = "flex";
-    evt.currentTarget.classList.add("active");
-    */
-
     if(evt.currentTarget.classList.contains("active")){
         evt.currentTarget.classList.remove("active");
         document.getElementById(tabName).style.display = "none";
@@ -417,8 +404,7 @@ function openTab(evt, tabName) {
         evt.currentTarget.classList.add("active");
         document.getElementById(tabName).style.display = "flex";
     }
-  }
-
+}
 
 function showRows(number) {
     var row3buttons = document.getElementById("row 3").children
@@ -443,10 +429,4 @@ function showRows(number) {
             }
             break;
     }
-    for (i = 0; i < row3buttons.length; i++) {
-
-        console.log('row3buttons[i]: ', );
-        
-    }
-
 }
