@@ -294,36 +294,58 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
 
 function rotateKeyboard(direction) {
     var kb = document.querySelector("#keyboard");
-    var rows = document.querySelectorAll("#keyboard.row");
+    var bb = document.querySelector("#bassboard");
+    var rows = document.querySelectorAll("#keyboard > .row, #bassboard > .row");
+    var acc = document.querySelector("#accordion");
+    var bellows_horizontal = document.querySelector('#bellows_horizontal');
+    var bellows_vertical = document.querySelector('#bellows_vertical');
 
     switch (direction) {
         case 1: // melody: left, bass: right
-            kb.style.flexDirection = "row";  
+            bellows_horizontal.style.display = "none";  
+            bellows_vertical.style.display = "flex";
+            bellows_vertical.style.transform = "";
+            acc.style.flexDirection = "row-reverse";
+            bb.style.flexDirection = "row-reverse";
+            kb.style.flexDirection = "row-reverse";  
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "column";
             } 
             break;
         case 2: // melody: top, bass: bottom
+            bellows_vertical.style.display = "none";
+            bellows_horizontal.style.display = "flex";
+            bellows_horizontal.style.transform = "";
+            acc.style.flexDirection = "column-reverse";
+            bb.style.flexDirection = "column-reverse";
             kb.style.flexDirection = "column-reverse";
             for (var i = 0; i < rows.length; i++) {
-                rows[i].style.flexDirection = "row";
+                rows[i].style.flexDirection = "row-reverse";
             }
             break;
-        case 3: // melody: right, bass: left
-            kb.style.flexDirection = "row-reverse";
+        case 3: // melody: right, bass: left          
+            bellows_horizontal.style.display = "none";  
+            bellows_vertical.style.display = "flex";
+            bellows_vertical.style.transform = "rotate(180deg)";
+            acc.style.flexDirection = "row";
+            bb.style.flexDirection = "row";
+            kb.style.flexDirection = "row";
             for (var i = 0; i < rows.length; i++) {
-                rows[i].style.flexDirection = "column";
+              rows[i].style.flexDirection = "column-reverse";
             }
             break;
         case 4: // melody: bottom, bass: top
+            bellows_vertical.style.display = "none";
+            bellows_horizontal.style.display = "flex";
+            bellows_horizontal.style.transform = "rotate(180deg)";
+            acc.style.flexDirection = "column";
+            bb.style.flexDirection = "column";
             kb.style.flexDirection = "column";
             for (var i = 0; i < rows.length; i++) {
                 rows[i].style.flexDirection = "row";
             }
             break;
     }
-
-    // direction = (direction + 1) % 4; // possible values: 0, 1, 2, 3
 }
 
 // css display: https://codeburst.io/common-problems-in-positioning-elements-in-css-best-practices-b03ac54dbdcb

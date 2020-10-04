@@ -14,8 +14,13 @@ body {
 }
 
 #core {
+   background-color: var(--color-foreground);
+}
+
+#accordion {
+   display: flex;
    flex-grow: 3;
-   width: calc(13.5*var(--button-size));
+   align-items: center;
 }
 
 #ppdiv {
@@ -73,6 +78,8 @@ body {
 
 .number {
    text-align: left;
+   height: calc(1.02 * var(--button-size));
+   width: calc(1.02 * var(--button-size));
 }
 
 .hidden { /* for accordeon buttons */
@@ -131,7 +138,6 @@ body {
  .tabcontent {
    display: none;
    padding: 10px;
-   background-color: var(--color-foreground);
  }
 
  .tabbttn {
