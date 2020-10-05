@@ -89,7 +89,7 @@ function optionOctave(){
     if(option_octave == 'diff'){
         document.querySelector('#staff_octave_ignore').classList.add("hide_staff");
         document.querySelector('#staff_octave_diff').classList.remove("hide_staff");
-        document.querySelector('body').style.flexDirection = "row-reverse";
+        document.querySelector('body').style.flexDirection = "row";
         document.querySelector('#menuLine').style.flexDirection = "column";
     }
     else if (option_octave == 'ignore'){
@@ -306,6 +306,7 @@ function rotateKeyboard(direction) {
             bellows_vertical.style.display = "flex";
             bellows_vertical.style.transform = "";
             acc.style.flexDirection = "row-reverse";
+            acc.style.justifyContent = "flex-start";
             bb.style.flexDirection = "row-reverse";
             kb.style.flexDirection = "row-reverse";  
             for (var i = 0; i < rows.length; i++) {
@@ -317,6 +318,7 @@ function rotateKeyboard(direction) {
             bellows_horizontal.style.display = "flex";
             bellows_horizontal.style.transform = "";
             acc.style.flexDirection = "column-reverse";
+            acc.style.justifyContent = "flex-end";
             bb.style.flexDirection = "column-reverse";
             kb.style.flexDirection = "column-reverse";
             for (var i = 0; i < rows.length; i++) {
@@ -328,6 +330,7 @@ function rotateKeyboard(direction) {
             bellows_vertical.style.display = "flex";
             bellows_vertical.style.transform = "rotate(180deg)";
             acc.style.flexDirection = "row";
+            acc.style.justifyContent = "flex-start";
             bb.style.flexDirection = "row";
             kb.style.flexDirection = "row";
             for (var i = 0; i < rows.length; i++) {
@@ -339,6 +342,7 @@ function rotateKeyboard(direction) {
             bellows_horizontal.style.display = "flex";
             bellows_horizontal.style.transform = "rotate(180deg)";
             acc.style.flexDirection = "column";
+            acc.style.justifyContent = "flex-end";
             bb.style.flexDirection = "column";
             kb.style.flexDirection = "column";
             for (var i = 0; i < rows.length; i++) {

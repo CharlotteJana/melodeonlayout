@@ -10,17 +10,17 @@
 body {
    display: flex;
    flex-direction: column;
-   justify-content : space-between;
 }
 
 #core {
-   background-color: var(--color-foreground);
+   background-color: var(--color-background);
 }
 
 #accordion {
    display: flex;
-   flex-grow: 3;
+   aflex-grow: 3;
    align-items: center;
+   background-color: var(--color-foreground);
 }
 
 #ppdiv {
@@ -144,9 +144,14 @@ body {
    display: flex;
    flex-direction: column;
    width: var(--button-size); 
+   height: 30px;
    border: 1px solid var(--color-foreground);
    border-bottom: none;
    background-color: var(--color-background);
+ }
+
+ .tabbttn > span {
+   line-height: 30px;
  }
 
  .active {
