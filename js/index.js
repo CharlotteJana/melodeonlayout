@@ -204,7 +204,12 @@ function toggleNote() {
     refresh_visible_accbtns();
 }
 
-function refresh_visible_accbtns() {
+function refresh_visible_accbtns(clear=false) {
+
+    if(clear){
+        window.accbtns_visible = new Set();
+        window.notes_visible = new Set();
+    }
 
     // refresh notes and accidentals in svgOctaveDiff
     var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
