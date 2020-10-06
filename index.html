@@ -301,14 +301,52 @@
             </div>  
             <div id="settings" class="tabcontent row-with-space"> 
                 <div>
-                <p><b>Tastenbelegung</b></p>
-                <p> Sprache:
-                    <select id="language" onChange="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value])">
-                    <option value="german">Deutsch</option>
-                    <option value="english">English</option>
-                    <option value="french">Français</option>
-                    </select>
+                <p><b>Allgemeines</b></p>
+                <p>Notenbezeichnungen:
+                    <label for="de">
+                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇩🇪
+                    </label>
+                    <label for="en">
+                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇬🇧
+                    </label>
+                   <label for="fr">
+                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇫🇷
+                    </label>
                 </p>
+                <p>Bezeichnungen immer anzeigen:
+                    <label for="show_note_names_yes">
+                        <input type="radio" id="show_note_names_yes" name="show_note_names" value="yes" onclick="">
+                        Ja
+                    </label>
+                    <label for="show_note_names_no">
+                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" checked onclick="">
+                        Nein
+                    </label>
+                </p>
+                <p>Oktavierungen:
+                    <label for="octave_diff">
+                        <input type="radio" id="octave_diff" name="octave" value="diff" onclick="optionOctave();">
+                        Unterscheiden
+                    </label>
+                    <label for="octave_ignore">
+                        <input type="radio" id="octave_ignore" name="octave" value="ignore" checked onclick="optionOctave();">
+                        Ignorieren
+                    </label>
+                </p>
+                <p>Dur und Moll:
+                    <label for="maj_min_diff">
+                        <input type="radio" id="maj_min_diff" name="major_minor" value="diff" onclick="">
+                        Unterscheiden
+                    </label>
+                    <label for="maj_min_ignore">
+                        <input type="radio" id="maj_min_ignore" name="major_minor" value="ignore" checked onclick="">
+                        Terzen ignorieren
+                    </label>
+                </p>
+                <p><b>Tastenbelegung</b></p>
                 <p> Anzahl der Reihen:
                     <select onChange="showRows(this.value)">
                     <option value="3">3</option>
@@ -316,39 +354,22 @@
                     <option value="2">2</option>
                 </select>
                 </p>
-                <p> Belegung 1. Reihe:
+                <p> Melodie-Seite:
                     <select>
-                    <option value="G">G</option>
-                    <option value="C">C</option>
+                    <option value="GC_3_heim" onclick="assignKeyboardLayout(GC_3_heim, note_names, 'right');">G - C - Heim</option>
                     <option value="edit">benutzerdefiniert</option>
                     </select>
                 </p>
-                <p> Belegung 2. Reihe:
+                <p> Bass-Seite:
                     <select>
-                    <option value="C">C</option>
-                    <option value="F">F</option>
+                    <option value="18" onclick="assignKeyboardLayout(GC_18, note_names, 'left');">18 Bässe</option>
                     <option value="edit">benutzerdefiniert</option>
                     </select>
-                </p>
-                <p> Belegung 3. Reihe:
-                    <select>
-                    <option value="Heim">Heim</option>
-                    <option value="edit">benutzerdefiniert</option>
-                    </select>
-                </p>
-                <p>
-                    <button onclick="assignKeyboardLayout()">Belegung bearbeiten</button>
                 </p>
                 </div>
                 <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: calc(0.5 * var(--button-size));"></div>
                 <div>
-                <p><b>Aussehen & Verhalten</b></p>
-                <p>Oktavierungen:
-                    <input type="radio" id="octave_diff" name="octave" value="diff" onclick="optionOctave();">
-                    <label for="octave_diff"> Unterscheiden</label>
-                    <input type="radio" id="octave_ignore" name="octave" value="ignore" checked onclick="optionOctave();">
-                    <label for="octave_ignore"> Ignorieren</label>
-                </p>
+                <p><b>Aussehen</b></p>
                 <form>
                     <label for="color_push">Farbe Schieben: </label>
                     <input type="color" value="#379D1F" id="color_push">
@@ -372,7 +393,7 @@
                 ­­­­</button>
                 <p>
                     Ausrichtung der Tasten:
-                    <div class="row">
+                    <div class="row" style="flex-wrap: wrap;">
                         <button onclick="adjustKeys(1)">
                             <div class="settingbtn" 
                                 style="flex-direction: column">
@@ -402,6 +423,9 @@
                             </div>
                         </button>
                     </div>
+                    <button onclick="adjustKeys(5)">
+                        Schieben auf Balgseite, <br>Ziehen auf Außenseite
+                    </button>                    
                 </p>
                 </div>
             </div>  

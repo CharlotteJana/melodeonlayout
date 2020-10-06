@@ -14,6 +14,7 @@ var accbtns_visible = new Set();
 var notes_visible = new Set(); 
 var accbtns_pull_hide_all = false; // bool
 var accbtns_push_hide_all = false; // bool
+var note_names;
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -49,7 +50,7 @@ function startup() {
   colorPull.select();
 
   // load KeyboardLayout
-  var note_names = window[document.querySelector('#language').value];
+  note_names = window[document.querySelector('input[name = "language"]:checked').value];
   assignKeyboardLayout(GC_3_heim, note_names, "right");
   assignKeyboardLayout(GC_18, note_names, "left");
 
