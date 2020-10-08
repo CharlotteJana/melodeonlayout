@@ -276,26 +276,42 @@ function refresh_visible_accbtns(clear=false) {
 function assignKeyboardLayout(layout, note_names, hand = null) {
     if(hand == "right"){
         window.keyboard_righthand = layout;
+        var rows = document.querySelectorAll('#keyboard > .row');
     }
     else if(hand == "left"){
         window.keyboard_lefthand = layout;
+        var rows = document.querySelectorAll('#bassboard > .row');
     }
+    rows.forEach(row => {
+        row.style.display = "flex";
+    })
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
-                if(layout[x].match('major')){
+                if(layout[x] == ""){
+                    document.getElementById(x).parentNode.style.display = "none";
+                }
+                else if(layout[x].match('major')){
                     document.getElementById(x).innerHTML = "+";
+                    document.getElementById(x).parentNode.style.display = "flex";
                 }
                 else if(layout[x].match('minor')){
                     document.getElementById(x).innerHTML = "-";
+                    document.getElementById(x).parentNode.style.display = "flex";
                 }
                 else{
                     document.getElementById(x).innerHTML = note_names[layout[x].replace(/[0-9]/g, '')];
+                    document.getElementById(x).parentNode.style.display = "flex";
                 }
             }
             catch (e) {continue}
         }
-    } 
+    }
+/*     rows.forEach(row => {
+        if(row.querySelectorAll("div[style='display: flex;']").length == 0){
+            row.style.display = "none";
+        }
+    })  */
 }
 
 function rotateKeyboard(direction) {
@@ -443,7 +459,7 @@ function showRows(number) {
     switch(number){
         case "2": 
             for(i = 0; i < row3buttons.length; i++){
-                row3buttons[i].style.visibility = "collapse";
+                row3buttons[i].style.display = "none";
             }
             break;
         case "2.5":
@@ -452,12 +468,12 @@ function showRows(number) {
                 if(index < 3 | index > 8)
                     row3buttons[i].style.visibility = "hidden";
                 else
-                row3buttons[i].style.visibility = "visible";
+                row3buttons[i].style.display = "flex";
             }
             break;
         case "3": 
             for(i = 0; i < row3buttons.length; i++){
-                row3buttons[i].style.visibility = "visible";
+                row3buttons[i].style.display = "flex";
             }
             break;
     }

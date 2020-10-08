@@ -4,17 +4,17 @@
 
 var german = {
     "f": "f", "f_sharp": "fis", "g": "g", "g_sharp": "gis", "a": "a", "b_flat": "b", 
-    "b": "h", "c": "c", "c_sharp": "cis", "d": "d", "e_flat": "es", "e": "e"
+    "b": "h", "c": "c", "c_sharp": "cis", "d": "d", "e_flat": "es", "e": "e", "": ""
 }
 
 var french = {
     "f": "fa", "f_sharp": "fa♯", "g": "sol", "g_sharp": "sol♯", "a": "la", "b_flat": "si♭", 
-    "b": "si", "c": "do", "c_sharp": "do♯", "d": "ré", "e_flat": "mi♭", "e": "mi"    
+    "b": "si", "c": "do", "c_sharp": "do♯", "d": "ré", "e_flat": "mi♭", "e": "mi", "": ""    
 }
 
 var english = {
     "f": "f", "f_sharp": "f♯", "g": "g", "g_sharp": "g♯", "a": "a", "b_flat": "b♭", 
-    "b": "b", "c": "c", "c_sharp": "c♯", "d": "d", "e_flat": "e♭", "e": "e"
+    "b": "b", "c": "c", "c_sharp": "c♯", "d": "d", "e_flat": "e♭", "e": "e", "": ""
 }
 
 //######################
@@ -65,7 +65,7 @@ GC_3_heim_dutch = { // G-C accordeon with 3 rows, 3rd row after Francois Heim, r
 //    Bass
 //######################
 
-GC_18 = { // G-C accordeon with 12 Basses
+GC_18 = { // G-C accordeon with 18 Basses
     //push    
     "b1''": "g_sharp_major", "b2''": "g2_sharp", "b3''": "g_major", "b4''": "g2", "b5''": "c_major", "b6''": "c2",
     "b1'": "e2_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
@@ -74,4 +74,26 @@ GC_18 = { // G-C accordeon with 12 Basses
     "b1''_": "b_major", "b2''_": "b2", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",
     "b1'_": "b_flat_major", "b2'_":"b2_flat", "b3'_": "a_minor", "b4'_": "a2", "b5'_": "f_major", "b6'_": "f2",
     "b1_": "c_sharp_major", "b2_": "c2_sharp", "b3_": "e_major", "b4_": "e2", "b5_": "c2_major", "b6_": "c2"
+}
+
+GC_12 = { // G-C accordeon with 12 Basses
+    //push    
+    "b1''": "g_sharp_major", "b2''": "g2_sharp", "b3''": "g_major", "b4''": "g2", "b5''": "c_major", "b6''": "c2",
+    "b1'": "e2_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
+    "b1": "", "b2": "", "b3": "", "b4": "", "b5": "", "b6": "",
+    //pull
+    "b1''_": "b_major", "b2''_": "b2", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",
+    "b1'_": "b_flat_major", "b2'_":"b2_flat", "b3'_": "a_minor", "b4'_": "a2", "b5'_": "f_major", "b6'_": "f2",
+    "b1_": "", "b2_": "", "b3_": "", "b4_": "", "b5_": "", "b6_": ""
+}
+
+GC_08 = { // G-C accordeon with 8 Basses
+    //push    
+    "b1''": "", "b2''": "", "b3''": "g_major", "b4''": "g2", "b5''": "c_major", "b6''": "c2",
+    "b1'": "", "b2'": "", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
+    "b1": "", "b2": "", "b3": "", "b4": "", "b5": "", "b6": "",
+    //pull
+    "b1''_": "", "b2''_": "", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",
+    "b1'_": "", "b2'_":"", "b3'_": "a_minor", "b4'_": "a2", "b5'_": "f_major", "b6'_": "f2",
+    "b1_": "", "b2_": "", "b3_": "", "b4_": "", "b5_": "", "b6_": ""
 }
