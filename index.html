@@ -348,23 +348,23 @@
                 </p>
                 <p><b>Tastenbelegung</b></p>
                 <p> Anzahl der Reihen:
-                    <select onChange="showRows(this.value)">
+                    <select id="setting_row_number" onChange="showRows(this.value)">
                     <option value="3">3</option>
                     <option value="2.5">2.5</option>
                     <option value="2">2</option>
                 </select>
                 </p>
                 <p> Melodie-Seite:
-                    <select>
+                    <select id="setting_layout_righthand">
                     <option value="GC_3_heim" onclick="assignKeyboardLayout(GC_3_heim, note_names, 'right');">G - C - Heim</option>
                     <option value="edit">benutzerdefiniert</option>
                     </select>
                 </p>
                 <p> Bass-Seite:
-                    <select>
-                    <option value="18" onclick="assignKeyboardLayout(GC_18, note_names, 'left');">18 Bässe für G - C</option>
-                    <option value="12" onclick="assignKeyboardLayout(GC_12, note_names, 'left');">12 Bässe für G - C</option>
-                    <option value="8" onclick="assignKeyboardLayout(GC_08, note_names, 'left');">08 Bässe für G - C</option>
+                    <select id="setting_layout_lefthand">
+                    <option value="GC_18" onclick="assignKeyboardLayout(GC_18, note_names, 'left');">18 Bässe für G - C</option>
+                    <option value="GC_12" onclick="assignKeyboardLayout(GC_12, note_names, 'left');">12 Bässe für G - C</option>
+                    <option value="GC_08" onclick="assignKeyboardLayout(GC_08, note_names, 'left');">08 Bässe für G - C</option>
                     <option value="edit">benutzerdefiniert</option>
                     </select>
                 </p>

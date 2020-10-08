@@ -50,9 +50,13 @@ function startup() {
   colorPull.select();
 
   // load KeyboardLayout
+  var row_number = document.querySelector('#setting_row_number').value;
   note_names = window[document.querySelector('input[name = "language"]:checked').value];
-  assignKeyboardLayout(GC_3_heim, note_names, "right");
-  assignKeyboardLayout(GC_18, note_names, "left");
+  keyboard_lefthand = window[document.querySelector('#setting_layout_lefthand').value];
+  keyboard_righthand = window[document.querySelector('#setting_layout_righthand').value];
+  assignKeyboardLayout(keyboard_lefthand, note_names, "left");
+  assignKeyboardLayout(keyboard_righthand, note_names, "right");
+  showRows(row_number);
 
   // accordeon buttons
   //var accbtns = document.querySelector('#keyboard').querySelectorAll('div.push, div.pull');
