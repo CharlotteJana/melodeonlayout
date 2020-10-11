@@ -68,7 +68,7 @@ GC_3_heim_dutch = { // G-C accordeon with 3 rows, 3rd row after Francois Heim, r
 GC_18 = { // G-C accordeon with 18 Basses
     //push    
     "b1''": "g_sharp_major", "b2''": "g2_sharp", "b3''": "g_major", "b4''": "g2", "b5''": "c_major", "b6''": "c2",
-    "b1'": "e2_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
+    "b1'": "e_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
     "b1": "c_sharp_major", "b2": "c2_sharp", "b3": "b_major", "b4": "b2", "b5": "d_major", "b6": "d2",
     //pull
     "b1''_": "b_major", "b2''_": "b2", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",
@@ -79,7 +79,7 @@ GC_18 = { // G-C accordeon with 18 Basses
 GC_12 = { // G-C accordeon with 12 Basses
     //push    
     "b1''": "g_sharp_major", "b2''": "g2_sharp", "b3''": "g_major", "b4''": "g2", "b5''": "c_major", "b6''": "c2",
-    "b1'": "e2_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
+    "b1'": "e_flat_major", "b2'": "e2_flat", "b3'": "e_major", "b4'": "e2", "b5'": "f_major", "b6'": "f2",
     "b1": "", "b2": "", "b3": "", "b4": "", "b5": "", "b6": "",
     //pull
     "b1''_": "b_major", "b2''_": "b2", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",

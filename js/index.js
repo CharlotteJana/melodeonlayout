@@ -217,7 +217,8 @@ function refresh_visible_accbtns(clear=false) {
     }
 
     // refresh notes and accidentals in svgOctaveDiff
-    var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
+    //var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
+    var single_notes = svgOctaveDiff.querySelectorAll(".music_note");
     var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
     var rects_all = svgOctaveIgnore.querySelectorAll('rect');
     single_notes.forEach(note => {
