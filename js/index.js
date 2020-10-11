@@ -74,6 +74,15 @@ function startup() {
       rect.addEventListener('click', toggleNote);
      // rect.addEventListener('touch', toggleNote); // Todo: müsste getestet werden
   });
+  var single_notes = svgOctaveDiff.querySelectorAll(".music_note");
+  single_notes.forEach(note => {
+      note.addEventListener('click', toggleNote);
+  })
+  var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
+  accidentals.forEach(accidental => {
+      accidental.addEventListener('click', toggleNote);
+  })
+    
   optionOctave();
   rect_list[2].dispatchEvent(new Event('click'));
   //rect_list[6].dispatchEvent(new Event('click'));
@@ -159,6 +168,17 @@ function toggleNote() {
                 hide_note = true;
             }
         }
+        // case: a note or accidental in svgOctaveIgnored has been clicked
+        else if(this.tagName.toLowerCase() == "path" | this.tagName.toLowerCase() == "text"){
+            note_with_oct = this.getAttributeNS(null, 'id');
+            rect = svgOctaveIgnore.getElementById(note_with_oct);
+            if(this.classList.contains("hidden")){
+                hide_note = false;
+            }
+            else{
+                hide_note = true;
+            }
+        }
 
     // ######### definition of arrays "button_ids" and "note_names" ##########
     if(option_octave == "diff"){
@@ -220,22 +240,27 @@ function refresh_visible_accbtns(clear=false) {
     //var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
     var single_notes = svgOctaveDiff.querySelectorAll(".music_note");
     var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
+    var ledgers = svgOctaveDiff.querySelectorAll("path[id^='ledger'");
     var rects_all = svgOctaveIgnore.querySelectorAll('rect');
     single_notes.forEach(note => {
-        setStyle(note, "opacity", "0%");
+        note.classList.add("hidden");
     })
     accidentals.forEach(accidental => {
-        setStyle(accidental, "opacity", "0%");
+        accidental.classList.add("hidden");
+    })
+    ledgers.forEach(ledger => {
+        setStyle(ledger, "opacity", "0%");
     })
     rects_all.forEach(rect => {
         setStyle(rect, "opacity", "0%");
     })
+    console.log(ledgers);
     notes_visible.forEach(note => {
         var note_visible = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
-        setStyle(note_visible, "opacity", "1");
+        note_visible.classList.remove("hidden");
         if(note.length > 2){ // note with accidentals 
             var accidental = svgOctaveDiff.querySelector('text[id='.concat(note));
-            setStyle(accidental, "opacity", "1");
+            accidental.classList.remove("hidden");
         }
         var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note.substr(0,1)));
         rects.forEach(rect => {

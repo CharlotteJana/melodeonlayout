@@ -12,7 +12,7 @@
                 <div id="pushbtn" class="push top ppbutton">⯮▥⯬</div>
                 <div id="pullbtn" class="pull bottom ppbutton">⯬▥⯮</div>
             </div> 
-            <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: calc(0.5 * var(--button-size));"></div>
+            <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: 0;"></div>
             <div id="staff_octave_ignore">
                 <object data="./img/staff_short.svg" type="image/svg+xml" id="svg_octave_ignore">
                     <!---Fallback--->
@@ -20,12 +20,12 @@
                 </object>
             </div>
             <div id="staff_octave_diff">
-                <object data="./img/staff_single.svg" type="image/svg+xml" id="svg_octave_diff">
+                <object data="./img/staff_single.svg" type="image/svg+xml" id="svg_octave_diff" style="width: calc(1.5 * var(--button-size));">
                     <!---Fallback--->
                     Ihr Browser kann leider kein Svg darstellen. 
                 </object>
             </div>
-            <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: calc(0.5 * var(--button-size));"></div>
+            <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: 0;"></div>
             <div>
                 <button id="clearAll" onclick="refresh_visible_accbtns(clear=true);">♫</button>
                 <span style="margin-left: -50%;" onclick="refresh_visible_accbtns(clear=true);">❌</span>

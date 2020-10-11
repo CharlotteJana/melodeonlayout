@@ -174,3 +174,12 @@ body {
 #bassboard {
    text-transform: capitalize;
 }
+
+.musical_note :hover {
+   fill: red;
+}
+
+path {
+   fill: red;
+   stroke: red;
+}
