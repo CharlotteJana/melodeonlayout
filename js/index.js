@@ -15,6 +15,8 @@ var notes_visible = new Set();
 var accbtns_pull_hide_all = false; // bool
 var accbtns_push_hide_all = false; // bool
 var note_names;
+var adjustKeys_direction;
+var rotateKeyboard_direction;
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -91,6 +93,7 @@ function startup() {
   // only show melody tab
   document.getElementById('righthandTab').dispatchEvent(new Event('click'));
 
+  adjustKeys(5)
   rotateKeyboard(4);
 }
 
@@ -345,6 +348,7 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
 }
 
 function rotateKeyboard(direction) {
+    window.rotateKeyboard_direction = direction;
     var kb = document.querySelector("#keyboard");
     var bb = document.querySelector("#bassboard");
     var rows = document.querySelectorAll("#keyboard > .row, #bassboard > .row");
@@ -352,13 +356,17 @@ function rotateKeyboard(direction) {
     var bellows_horizontal = document.querySelector('#bellows_horizontal');
     var bellows_vertical = document.querySelector('#bellows_vertical');
 
+    if(adjustKeys_direction == 5){
+        adjustKeys(5);
+    }
+
     switch (direction) {
         case 1: // melody: left, bass: right
             bellows_horizontal.style.display = "none";  
             bellows_vertical.style.display = "flex";
             bellows_vertical.style.transform = "";
             acc.style.flexDirection = "row-reverse";
-            acc.style.justifyContent = "flex-start";
+            acc.style.justifyContent = "flex-end";
             bb.style.flexDirection = "row-reverse";
             kb.style.flexDirection = "row-reverse";  
             for (var i = 0; i < rows.length; i++) {
@@ -407,6 +415,7 @@ function rotateKeyboard(direction) {
 // css display: https://codeburst.io/common-problems-in-positioning-elements-in-css-best-practices-b03ac54dbdcb
 
 function adjustKeys(direction) {
+    window.adjustKeys_direction = direction;
     var buttons = document.querySelectorAll(".button");
 
     switch (direction) {
@@ -467,6 +476,64 @@ function adjustKeys(direction) {
                 if(pull !== null){
                     pull.classList.remove("top", "bottom", "left", "right");
                     pull.classList.add("right");
+                }
+            }
+            break;
+        case 5: // pull always outside, push always near bellows
+            for (var i = 0; i < buttons.length; i++) {
+                bass_button = buttons[i].parentElement.id.startsWith("bass");
+                pull = buttons[i].querySelector(".pull");
+                push = buttons[i].querySelector(".push");
+                pull?.classList.remove("top", "bottom", "left", "right");
+                push?.classList.remove("top", "bottom", "left", "right");
+
+                if(rotateKeyboard_direction == 1){
+                    if(bass_button){
+                        buttons[i].style.flexDirection = "row";
+                        push?.classList.add("left");
+                        pull?.classList.add("right");
+                    }
+                    else{
+                        buttons[i].style.flexDirection = "row-reverse";
+                        push?.classList.add("right");
+                        pull?.classList.add("left");
+                    }
+                }
+                else if (rotateKeyboard_direction == 2){
+                    if(bass_button){
+                        buttons[i].style.flexDirection = "column";
+                        push?.classList.add("top");
+                        pull?.classList.add("bottom");
+                    }
+                    else{
+                        buttons[i].style.flexDirection = "column-reverse";
+                        push?.classList.add("bottom");
+                        pull?.classList.add("top");
+                    }
+                }
+                else if (rotateKeyboard_direction == 3) {
+                    if(bass_button){
+                        buttons[i].style.flexDirection = "row-reverse";
+                        push?.classList.add("right");
+                        pull?.classList.add("left");
+                    }
+                    else{
+                        buttons[i].style.flexDirection = "row";
+                        push?.classList.add("left");
+                        pull?.classList.add("right");
+                    }
+                }
+                else if (rotateKeyboard_direction == 4) {
+                    if(bass_button){
+                        buttons[i].style.flexDirection = "column-reverse";
+                        push?.classList.add("bottom");
+                        pull?.classList.add("top");
+                    }
+                    else{
+                        buttons[i].style.flexDirection = "column";
+                        push?.classList.add("top");
+                        pull?.classList.add("bottom");
+                    }
                 }
             }
             break;
