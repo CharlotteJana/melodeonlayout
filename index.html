@@ -33,13 +33,145 @@
         </div>
         <div id="core">
             <div id="tabmenu" class="row">
+                <button id="settingsTab" class="tabbttn" onclick="openTab(event, 'settings')"><span>⚙️</span></button>
                 <button id="lefthandTab" class="tabbttn" onclick="openTab(event, 'lefthand')"><span style="transform: rotate(90deg) scaleX(-1)">🖐</span></button>
                 <button id="bellowsTab" class="tabbttn" onclick="openTab(event, 'bellows')"><span>▥</span></button>            
                 <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')"><span style="transform: rotate(-90deg)">🖐</span></button>            
-                <button id="settingsTab" class="tabbttn" onclick="openTab(event, 'settings')"><span>⚙️</span></button>
                 <button id="helpTab" class="tabbttn" onclick="openTab(event, 'help')"><span>?</span></button>
             </div>
-            <div id="accordion">
+            <div id="settings" class="tabcontent row"> 
+                <div>
+                <p><b>Allgemeines</b></p>
+                <p>Notenbezeichnungen:
+                    <label for="de">
+                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇩🇪
+                    </label>
+                    <label for="en">
+                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇬🇧
+                    </label>
+                   <label for="fr">
+                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        🇫🇷
+                    </label>
+                </p>
+                <p>Bezeichnungen immer anzeigen:
+                    <label for="show_note_names_yes">
+                        <input type="radio" id="show_note_names_yes" name="show_note_names" value="yes" onclick="">
+                        Ja
+                    </label>
+                    <label for="show_note_names_no">
+                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" checked onclick="">
+                        Nein
+                    </label>
+                </p>
+                <p>Oktavierungen:
+                    <label for="octave_diff">
+                        <input type="radio" id="octave_diff" name="octave" value="diff" onclick="optionOctave();">
+                        Unterscheiden
+                    </label>
+                    <label for="octave_ignore">
+                        <input type="radio" id="octave_ignore" name="octave" value="ignore" checked onclick="optionOctave();">
+                        Ignorieren
+                    </label>
+                </p>
+                <p>Dur und Moll:
+                    <label for="maj_min_diff">
+                        <input type="radio" id="maj_min_diff" name="major_minor" value="diff" onclick="">
+                        Unterscheiden
+                    </label>
+                    <label for="maj_min_ignore">
+                        <input type="radio" id="maj_min_ignore" name="major_minor" value="ignore" checked onclick="">
+                        Terzen ignorieren
+                    </label>
+                </p>
+                <p><b>Tastenbelegung</b></p>
+                <p> Anzahl der Reihen:
+                    <select id="setting_row_number" onChange="showRows(this.value)">
+                    <option value="3">3</option>
+                    <option value="2.5">2.5</option>
+                    <option value="2">2</option>
+                </select>
+                </p>
+                <p> Melodie-Seite:
+                    <select id="setting_layout_righthand">
+                    <option value="GC_3_heim" onclick="assignKeyboardLayout(GC_3_heim, note_names, 'right');">G - C - Heim</option>
+                    <option value="edit">benutzerdefiniert</option>
+                    </select>
+                </p>
+                <p> Bass-Seite:
+                    <select id="setting_layout_lefthand">
+                    <option value="GC_18" onclick="assignKeyboardLayout(GC_18, note_names, 'left');">18 Bässe für G - C</option>
+                    <option value="GC_12" onclick="assignKeyboardLayout(GC_12, note_names, 'left');">12 Bässe für G - C</option>
+                    <option value="GC_08" onclick="assignKeyboardLayout(GC_08, note_names, 'left');">08 Bässe für G - C</option>
+                    <option value="edit">benutzerdefiniert</option>
+                    </select>
+                </p>
+                </div>
+                <div class="empty button" style="width: calc(0.5 * var(--button-size));; height: calc(0.5 * var(--button-size));"></div>
+                <div>
+                <p><b>Aussehen</b></p>
+                <form>
+                    <label for="color_push">Farbe Schieben: </label>
+                    <input type="color" value="#379D1F" id="color_push">
+                </form>
+                <form>
+                    <label for="color_pull">Farbe Ziehen: </label>
+                    <input type="color" value="#ADEE50" id="color_pull">
+                </form>
+                <p>Ausrichtung des Griffbretts: </p>
+                <button class="ausrichtung" onclick="rotateKeyboard(1)">
+                    <img src="./img/accordion_person.png">
+                ­­­­</button>
+                <button class="ausrichtung" onclick="rotateKeyboard(2)">
+                    <img src="./img/accordion_person.png" style="transform: rotate(90deg);">
+                ­­­­</button>
+                <button class="ausrichtung" onclick="rotateKeyboard(3)">
+                    <img src="./img/accordion_person.png" style="transform: rotate(180deg);">
+                ­­­­</button> 
+                <button class="ausrichtung" onclick="rotateKeyboard(4)">
+                    <img src="./img/accordion_person.png" style="transform: rotate(-90deg);">
+                ­­­­</button>
+                <p>
+                    Ausrichtung der Tasten:
+                    <div class="row" style="flex-wrap: wrap;">
+                        <button onclick="adjustKeys(1)">
+                            <div class="settingbtn" 
+                                style="flex-direction: column">
+                                <div class="push top"></div>
+                                <div class="pull bottom"></div>
+                            </div>
+                        </button>
+                        <button onclick="adjustKeys(2)">
+                            <div class="settingbtn" 
+                                style="flex-direction: row-reverse">
+                                <div class="push right"></div>
+                                <div class="pull left"></div>
+                            </div>
+                        </button>
+                        <button onclick="adjustKeys(3)">
+                            <div class="settingbtn" 
+                                style="flex-direction: column-reverse">
+                                <div class="push bottom"></div>
+                                <div class="pull top"></div>
+                            </div>
+                        </button>
+                        <button onclick="adjustKeys(4)">
+                            <div class="settingbtn" 
+                                style="flex-direction: row">
+                                <div class="push left"></div>
+                                <div class="pull right"></div>
+                            </div>
+                        </button>
+                    </div>
+                    <button onclick="adjustKeys(5)">
+                        Schieben auf Balgseite, <br>Ziehen auf Außenseite
+                    </button>                    
+                </p>
+                </div>
+            </div> 
+            <div id="accordion"> 
                 <div id="lefthand" class="tabcontent">
                     <div id="bassboard" class="keyboard">
                         <div id="bassrow 3" class="row">
@@ -298,138 +430,6 @@
                         </div>
                     </div>
                 </div> 
-            </div>  
-            <div id="settings" class="tabcontent row-with-space"> 
-                <div>
-                <p><b>Allgemeines</b></p>
-                <p>Notenbezeichnungen:
-                    <label for="de">
-                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
-                        🇩🇪
-                    </label>
-                    <label for="en">
-                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
-                        🇬🇧
-                    </label>
-                   <label for="fr">
-                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
-                        🇫🇷
-                    </label>
-                </p>
-                <p>Bezeichnungen immer anzeigen:
-                    <label for="show_note_names_yes">
-                        <input type="radio" id="show_note_names_yes" name="show_note_names" value="yes" onclick="">
-                        Ja
-                    </label>
-                    <label for="show_note_names_no">
-                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" checked onclick="">
-                        Nein
-                    </label>
-                </p>
-                <p>Oktavierungen:
-                    <label for="octave_diff">
-                        <input type="radio" id="octave_diff" name="octave" value="diff" onclick="optionOctave();">
-                        Unterscheiden
-                    </label>
-                    <label for="octave_ignore">
-                        <input type="radio" id="octave_ignore" name="octave" value="ignore" checked onclick="optionOctave();">
-                        Ignorieren
-                    </label>
-                </p>
-                <p>Dur und Moll:
-                    <label for="maj_min_diff">
-                        <input type="radio" id="maj_min_diff" name="major_minor" value="diff" onclick="">
-                        Unterscheiden
-                    </label>
-                    <label for="maj_min_ignore">
-                        <input type="radio" id="maj_min_ignore" name="major_minor" value="ignore" checked onclick="">
-                        Terzen ignorieren
-                    </label>
-                </p>
-                <p><b>Tastenbelegung</b></p>
-                <p> Anzahl der Reihen:
-                    <select id="setting_row_number" onChange="showRows(this.value)">
-                    <option value="3">3</option>
-                    <option value="2.5">2.5</option>
-                    <option value="2">2</option>
-                </select>
-                </p>
-                <p> Melodie-Seite:
-                    <select id="setting_layout_righthand">
-                    <option value="GC_3_heim" onclick="assignKeyboardLayout(GC_3_heim, note_names, 'right');">G - C - Heim</option>
-                    <option value="edit">benutzerdefiniert</option>
-                    </select>
-                </p>
-                <p> Bass-Seite:
-                    <select id="setting_layout_lefthand">
-                    <option value="GC_18" onclick="assignKeyboardLayout(GC_18, note_names, 'left');">18 Bässe für G - C</option>
-                    <option value="GC_12" onclick="assignKeyboardLayout(GC_12, note_names, 'left');">12 Bässe für G - C</option>
-                    <option value="GC_08" onclick="assignKeyboardLayout(GC_08, note_names, 'left');">08 Bässe für G - C</option>
-                    <option value="edit">benutzerdefiniert</option>
-                    </select>
-                </p>
-                </div>
-                <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: calc(0.5 * var(--button-size));"></div>
-                <div>
-                <p><b>Aussehen</b></p>
-                <form>
-                    <label for="color_push">Farbe Schieben: </label>
-                    <input type="color" value="#379D1F" id="color_push">
-                </form>
-                <form>
-                    <label for="color_pull">Farbe Ziehen: </label>
-                    <input type="color" value="#ADEE50" id="color_pull">
-                </form>
-                <p>Ausrichtung des Griffbretts: </p>
-                <button class="ausrichtung" onclick="rotateKeyboard(1)">
-                    <img src="./img/accordion_person.png">
-                ­­­­</button>
-                <button class="ausrichtung" onclick="rotateKeyboard(2)">
-                    <img src="./img/accordion_person.png" style="transform: rotate(90deg);">
-                ­­­­</button>
-                <button class="ausrichtung" onclick="rotateKeyboard(3)">
-                    <img src="./img/accordion_person.png" style="transform: rotate(180deg);">
-                ­­­­</button> 
-                <button class="ausrichtung" onclick="rotateKeyboard(4)">
-                    <img src="./img/accordion_person.png" style="transform: rotate(-90deg);">
-                ­­­­</button>
-                <p>
-                    Ausrichtung der Tasten:
-                    <div class="row" style="flex-wrap: wrap;">
-                        <button onclick="adjustKeys(1)">
-                            <div class="settingbtn" 
-                                style="flex-direction: column">
-                                <div class="push top"></div>
-                                <div class="pull bottom"></div>
-                            </div>
-                        </button>
-                        <button onclick="adjustKeys(2)">
-                            <div class="settingbtn" 
-                                style="flex-direction: row-reverse">
-                                <div class="push right"></div>
-                                <div class="pull left"></div>
-                            </div>
-                        </button>
-                        <button onclick="adjustKeys(3)">
-                            <div class="settingbtn" 
-                                style="flex-direction: column-reverse">
-                                <div class="push bottom"></div>
-                                <div class="pull top"></div>
-                            </div>
-                        </button>
-                        <button onclick="adjustKeys(4)">
-                            <div class="settingbtn" 
-                                style="flex-direction: row">
-                                <div class="push left"></div>
-                                <div class="pull right"></div>
-                            </div>
-                        </button>
-                    </div>
-                    <button onclick="adjustKeys(5)">
-                        Schieben auf Balgseite, <br>Ziehen auf Außenseite
-                    </button>                    
-                </p>
-                </div>
             </div>  
         </div>
     </body>

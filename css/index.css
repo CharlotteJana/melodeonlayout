@@ -22,6 +22,10 @@ body {
    background-color: var(--color-foreground);
 }
 
+#settings {
+   background-color: var(--color-foreground);
+}
+
 #ppdiv {
    display: flex;
    flex-direction: column;
