@@ -97,3 +97,21 @@ GC_08 = { // G-C accordeon with 8 Basses
     "b1'_": "", "b2'_":"", "b3'_": "a_minor", "b4'_": "a2", "b5'_": "f_major", "b6'_": "f2",
     "b1_": "", "b2_": "", "b3_": "", "b4_": "", "b5_": "", "b6_": ""
 }
+
+//############################
+//    musical knowledge
+//############################
+
+var notes_with_ledgers = {
+  "c2": ["ledger_down_bass_1", "ledger_down_bass_2"],
+  "d2": ["ledger_down_bass_1"],
+  "e2": ["ledger_down_bass_1"],
+  "c4": ["ledger_down_1"],
+  "a5": ["ledger_up_1"], 
+  "b5": ["ledger_up_1"],
+  "c6": ["ledger_up_1", "ledger_up_2"], 
+  "d6": ["ledger_up_1", "ledger_up_2"],
+  "e6": ["ledger_up_1", "ledger_up_2", "ledger_up_3"],
+  "f6": ["ledger_up_1", "ledger_up_2", "ledger_up_3"],
+  "g6": ["ledger_up_1", "ledger_up_2", "ledger_up_3", "ledger_up_4"]
+}

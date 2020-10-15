@@ -243,8 +243,8 @@ function refresh_visible_accbtns(clear=false) {
     //var single_notes = svgOctaveDiff.querySelectorAll('#notes_between_lines > path, #notes_on_lines > path');
     var single_notes = svgOctaveDiff.querySelectorAll(".music_note");
     var accidentals = svgOctaveDiff.querySelectorAll("text[id$='flat'], text[id$='sharp']");
-    var ledgers = svgOctaveDiff.querySelectorAll("path[id^='ledger'");
     var rects_all = svgOctaveIgnore.querySelectorAll('rect');
+    var ledgers = svgOctaveDiff.querySelectorAll("path[id^='ledger'");
     single_notes.forEach(note => {
         note.classList.add("hidden");
     })
@@ -257,13 +257,20 @@ function refresh_visible_accbtns(clear=false) {
     rects_all.forEach(rect => {
         setStyle(rect, "opacity", "0%");
     })
-    console.log(ledgers);
     notes_visible.forEach(note => {
         var note_visible = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
         note_visible.classList.remove("hidden");
         if(note.length > 2){ // note with accidentals 
             var accidental = svgOctaveDiff.querySelector('text[id='.concat(note));
             accidental.classList.remove("hidden");
+        }
+        if(note.substr(0,2) in notes_with_ledgers){
+            ledgers_visible = notes_with_ledgers[note.substr(0,2)];
+            ledgers.forEach(ledger => {
+                if(ledgers_visible.includes(ledger.id)){
+                    setStyle(ledger, "opacity", "1");
+                }                
+            })
         }
         var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note.substr(0,1)));
         rects.forEach(rect => {
