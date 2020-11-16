@@ -99,8 +99,10 @@ GC_08 = { // G-C accordeon with 8 Basses
 }
 
 //############################
-//    musical knowledge
+//    music theory
 //############################
+
+//TODO: Create new file with variables that are not related to the keyboard layout
 
 var notes_with_ledgers = {
   "c2": ["ledger_down_bass_1", "ledger_down_bass_2"],

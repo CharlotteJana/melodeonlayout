@@ -69,8 +69,8 @@ function startup() {
   })
 
   // load svgs
-  svgOctaveDiff = document.getElementById('svg_octave_diff').contentDocument; // Todo: Namen ändern
-  svgOctaveIgnore = document.getElementById('svg_octave_ignore').contentDocument; // Todo: Namen ändern
+  svgOctaveDiff = document.getElementById('svg_octave_diff').contentDocument;
+  svgOctaveIgnore = document.getElementById('svg_octave_ignore').contentDocument;
   var rect_list = svgOctaveIgnore.querySelectorAll('rect');
   rect_list.forEach(rect => {
       rect.addEventListener('click', toggleNote);
@@ -285,6 +285,7 @@ function refresh_visible_accbtns(clear=false) {
     for(var i = 0; i < accbtns_push.length; i++){
         if(window.accbtns_push_hide_all){
             accbtns_push[i].classList.add("hidden");
+            //TODO: Find all notes that are only in push and remove the corresponding rects and notes in the svg files
         }
         else if(window.accbtns_visible.has(accbtns_push[i].id)){
             accbtns_push[i].classList.remove("hidden");
@@ -299,6 +300,7 @@ function refresh_visible_accbtns(clear=false) {
     for(var i = 0; i < accbtns_pull.length; i++){
         if(window.accbtns_pull_hide_all){
             accbtns_pull[i].classList.add("hidden");
+            //TODO: Find all notes that are only in pull and remove the corresponding rects and notes in the svg files
         }
         else if(window.accbtns_visible.has(accbtns_pull[i].id)){
             accbtns_pull[i].classList.remove("hidden");
