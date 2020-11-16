@@ -1,23 +1,4 @@
 //######################
-//    translations
-//######################
-
-var german = {
-    "f": "f", "f_sharp": "fis", "g": "g", "g_sharp": "gis", "a": "a", "b_flat": "b", 
-    "b": "h", "c": "c", "c_sharp": "cis", "d": "d", "e_flat": "es", "e": "e", "": ""
-}
-
-var french = {
-    "f": "fa", "f_sharp": "fa♯", "g": "sol", "g_sharp": "sol♯", "a": "la", "b_flat": "si♭", 
-    "b": "si", "c": "do", "c_sharp": "do♯", "d": "ré", "e_flat": "mi♭", "e": "mi", "": ""    
-}
-
-var english = {
-    "f": "f", "f_sharp": "f♯", "g": "g", "g_sharp": "g♯", "a": "a", "b_flat": "b♭", 
-    "b": "b", "c": "c", "c_sharp": "c♯", "d": "d", "e_flat": "e♭", "e": "e", "": ""
-}
-
-//######################
 //    layouts
 //######################
 
@@ -96,24 +77,4 @@ GC_08 = { // G-C accordeon with 8 Basses
     "b1''_": "", "b2''_": "", "b3''_": "d_major", "b4''_": "d2", "b5''_": "g_major", "b6''_": "g2",
     "b1'_": "", "b2'_":"", "b3'_": "a_minor", "b4'_": "a2", "b5'_": "f_major", "b6'_": "f2",
     "b1_": "", "b2_": "", "b3_": "", "b4_": "", "b5_": "", "b6_": ""
-}
-
-//############################
-//    music theory
-//############################
-
-//TODO: Create new file with variables that are not related to the keyboard layout
-
-var notes_with_ledgers = {
-  "c2": ["ledger_down_bass_1", "ledger_down_bass_2"],
-  "d2": ["ledger_down_bass_1"],
-  "e2": ["ledger_down_bass_1"],
-  "c4": ["ledger_down_1"],
-  "a5": ["ledger_up_1"], 
-  "b5": ["ledger_up_1"],
-  "c6": ["ledger_up_1", "ledger_up_2"], 
-  "d6": ["ledger_up_1", "ledger_up_2"],
-  "e6": ["ledger_up_1", "ledger_up_2", "ledger_up_3"],
-  "f6": ["ledger_up_1", "ledger_up_2", "ledger_up_3"],
-  "g6": ["ledger_up_1", "ledger_up_2", "ledger_up_3", "ledger_up_4"]
 }
