@@ -10,8 +10,8 @@
     <body>
         <div id="menuLine" class="row"> 
             <div id="ppdiv" class="button">
-                <div id="pushbtn" class="push top ppbutton">⯮▥⯬</div>
-                <div id="pullbtn" class="pull bottom ppbutton">⯬▥⯮</div>
+                <div id="pushbtn" class="push top ppbutton">↠▥↞</div>
+                <div id="pullbtn" class="pull bottom ppbutton">↞▥↠</div>
             </div> 
             <div class="empty button" style="width: calc(0.5 * var(--button-size)); height: 0;"></div>
             <div id="staff_octave_ignore">
@@ -35,9 +35,9 @@
         <div id="core">
             <div id="tabmenu" class="row">
                 <button id="settingsTab" class="tabbttn" onclick="openTab(event, 'settings')"><span>⚙️</span></button>
-                <button id="lefthandTab" class="tabbttn" onclick="openTab(event, 'lefthand')"><span style="transform: rotate(90deg) scaleX(-1)">🖐</span></button>
+                <button id="lefthandTab" class="tabbttn" onclick="openTab(event, 'lefthand')"><span style="transform: rotate(90deg) scaleX(-1)">✋🏿</span></button>
                 <button id="bellowsTab" class="tabbttn" onclick="openTab(event, 'bellows')"><span>▥</span></button>            
-                <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')"><span style="transform: rotate(-90deg)">🖐</span></button>            
+                <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')"><span style="transform: rotate(-90deg)">✋🏿</span></button>            
                 <button id="helpTab" class="tabbttn" onclick="openTab(event, 'help')"><span>?</span></button>
             </div>
             <div id="settings" class="tabcontent row"> 
@@ -45,25 +45,25 @@
                 <p><b>Allgemeines</b></p>
                 <p>Notenbezeichnungen:
                     <label for="de">
-                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
                         🇩🇪
                     </label>
                     <label for="en">
-                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
                         🇬🇧
                     </label>
                    <label for="fr">
-                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value]);">
+                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
                         🇫🇷
                     </label>
                 </p>
                 <p>Bezeichnungen immer anzeigen:
                     <label for="show_note_names_yes">
-                        <input type="radio" id="show_note_names_yes" name="show_note_names" value="yes" onclick="">
+                        <input type="radio" id="show_note_names_yes" name="show_note_names" value="yes" checked onclick="">
                         Ja
                     </label>
                     <label for="show_note_names_no">
-                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" checked onclick="">
+                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" onclick="">
                         Nein
                     </label>
                 </p>

@@ -2,7 +2,7 @@
 //    music theory
 //############################
 
-const note_order = [
+var note_order = [
     "c1", "c1_sharp", "d1", "e1_flat", "e1", "f1", "f1_sharp", "g1", "g1_sharp", "a1", "b1_flat", "b1",
     "c2", "c2_sharp", "d2", "e2_flat", "e2", "f2", "f2_sharp", "g2", "g2_sharp", "a2", "b2_flat", "b2",
     "c3", "c3_sharp", "d3", "e3_flat", "e3", "f3", "f3_sharp", "g3", "g3_sharp", "a3", "b3_flat", "b3",
@@ -15,7 +15,7 @@ const note_order = [
 // i.e. for triads we have r1 = normal form, r2 = second inversion, r3 = first inversion
 
 // chords with 3 notes:
-const chords_3 = {
+var chords_3 = {
     "major_r1": [0,4,7], "major_r2": [0,3,8], "major_r3": [0,5,9], // major chord, ex: C
     "minor_r1": [0,3,7], "minor_r2": [0,4,9], "minor_r3": [0,5,8], // minor chord, ex: c
     "dimin_r1": [0,3,6], "dimin_r2": [0,3,9], "dimin_r3": [0,6,9], // diminished chord, ex:
@@ -24,7 +24,7 @@ const chords_3 = {
 }
 
 // chords with 4 notes:
-const chords_4 = {
+var chords_4 = {
     "major7_r1": [0,4,7,11], "major7_r2": [0,1,5,8], "major7_r3": [0,4,5,9], "major7_r4": [0,3,7,8], // major seventh, ex: Cmaj7 = c,e,g,b
     "minor7_r1": [0,3,7,10], "minor7_r2": [0,2,5,10], "minor7_r3": [0,3,5,8], "minor7_r4": [0,4,7,9], // minor seventh, ex: Cmin7 = c,e♭,g,b♭
     "dom7_r1": [0,4,7,10], "dom7_r2": [0,2,6,9], "dom7_r3": [0,3,5,9], "dom7_r4": [0,3,6,8], // dominant seventh, ex: C7 = c,e,g,b♭    
@@ -38,21 +38,21 @@ const chords_4 = {
 //#################################
 
 // the note names that are internally used correspond to nnames_usual
-const nnames_usual = ["f", "f_sharp", "g", "g_sharp", "a", "b_flat",  "b", "c", "c_sharp", "d", "e_flat",  "e"]
-const nnames_flat  = ["f", "g_flat",  "g", "a_flat",  "a", "b_flat",  "b", "c", "d_flat",  "d", "e_flat",  "e"]
-const nnames_sharp = ["f", "f_sharp", "g", "g_sharp", "a", "a_sharp", "b", "c", "c_sharp", "d", "d_sharp", "e"]
+var nnames_usual = ["f", "f_sharp", "g", "g_sharp", "a", "b_flat",  "b", "c", "c_sharp", "d", "e_flat",  "e"]
+var nnames_flat  = ["f", "g_flat",  "g", "a_flat",  "a", "b_flat",  "b", "c", "d_flat",  "d", "e_flat",  "e"]
+var nnames_sharp = ["f", "f_sharp", "g", "g_sharp", "a", "a_sharp", "b", "c", "c_sharp", "d", "d_sharp", "e"]
 
-const german = {
+var german = {
     "f": "f", "f_sharp": "fis", "g_flat": "ges", "g": "g", "g_sharp": "gis", "a_flat": "as", "a": "a", "a_sharp": "ais", "b_flat": "b", 
     "b": "h", "c": "c", "c_sharp": "cis", "d_flat": "des", "d": "d", "d_sharp": "dis", "e_flat": "es", "e": "e", "": ""
 }
 
-const french = {
+var french = {
     "f": "fa", "f_sharp": "fa♯", "g_flat": "sol♭", "g": "sol", "g_sharp": "sol♯", "a_flat": "la♭", "a": "la", "a_sharp": "la♯", "b_flat": "si♭", 
     "b": "si", "c": "do", "c_sharp": "do♯", "d_flat": "ré♭", "d": "ré", "d_sharp": "ré♯", "e_flat": "mi♭", "e": "mi", "": ""    
 }
 
-const english = {
+var english = {
     "f": "f", "f_sharp": "f♯", "g_flat": "g♭", "g": "g", "g_sharp": "g♯", "a_flat": "a♭", "a": "a", "a_sharp": "a♯", "b_flat": "b♭", 
     "b": "b", "c": "c", "c_sharp": "c♯", "d_flat": "d♭", "d": "d", "d_sharp": "d♯", "e_flat": "e♭", "e": "e", "": ""
 }

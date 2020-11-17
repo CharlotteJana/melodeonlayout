@@ -202,7 +202,6 @@ function toggleNote() {
         );
        /* for (const [key, value] of Object.entries(window.keyboard_righthand)) {
             if(${key}.replace(/[0-9]/g, '') == note_no_oct){
-                console.log(${value});
                 button_ids.push(${key});
                 note_names.push(${value});
             }
@@ -323,6 +322,9 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
     else if(hand == "left"){
         window.keyboard_lefthand = layout;
         var rows = document.querySelectorAll('#bassboard > .row');
+    }
+    else if(hand == "both"){
+        var rows = document.querySelectorAll('#keyboard > .row, #bassboard > .row');
     }
     rows.forEach(row => {
         row.style.display = "flex";
