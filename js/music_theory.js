@@ -2,6 +2,10 @@
 //    music theory
 //############################
 
+// Plan:
+// Zunächst Auswahl Button: Select Root and Select Type of Chords → Show correct buttons
+// Zweiter Schritt: Select 2 - 4 Notes → get possible Chords
+
 var note_order = [
     "c1", "c1_sharp", "d1", "e1_flat", "e1", "f1", "f1_sharp", "g1", "g1_sharp", "a1", "b1_flat", "b1",
     "c2", "c2_sharp", "d2", "e2_flat", "e2", "f2", "f2_sharp", "g2", "g2_sharp", "a2", "b2_flat", "b2",

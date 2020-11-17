@@ -37,7 +37,9 @@
                 <button id="settingsTab" class="tabbttn" onclick="openTab(event, 'settings')"><span>⚙️</span></button>
                 <button id="lefthandTab" class="tabbttn" onclick="openTab(event, 'lefthand')"><span style="transform: rotate(90deg) scaleX(-1)">✋🏿</span></button>
                 <button id="bellowsTab" class="tabbttn" onclick="openTab(event, 'bellows')"><span>▥</span></button>            
-                <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')"><span style="transform: rotate(-90deg)">✋🏿</span></button>            
+                <button id="righthandTab" class="tabbttn" onclick="openTab(event, 'righthand')"><span style="transform: rotate(-90deg)">✋🏿</span></button>  
+                <button id="chordsTab" class="tabbttn" onclick="openTab(event, 'chords')"><span>Chords</span></button> 
+                <button id="scaleTab" class="tabbttn" onclick="openTab(event, 'scale')"><span>Scale</span></button>          
                 <button id="helpTab" class="tabbttn" onclick="openTab(event, 'help')"><span>?</span></button>
             </div>
             <div id="settings" class="tabcontent row"> 
@@ -63,7 +65,7 @@
                         Ja
                     </label>
                     <label for="show_note_names_no">
-                        <input type="radio" id="show_note_names_no" name="show_note_names" value="no" onclick="">
+                    <input type="radio" id="show_note_names_no" name="show_note_names" value="no" onclick="">
                         Nein
                     </label>
                 </p>
@@ -431,6 +433,57 @@
                         </div>
                     </div>
                 </div> 
+                <div id="chords" class="tabcontent">
+                    <p style="margin-right:var(--half-button-size);"> Grundton:
+                        <select id="select_root_for_chord">
+                        <option value="c" onclick=""></option>
+                        <option value="c_sharp" onclick=""></option>
+                        <option value="d" onclick=""></option>
+                        <option value="e_flat" onclick=""></option>
+                        <option value="e" onclick=""></option>
+                        <option value="f" onclick=""></option>
+                        <option value="f_sharp" onclick=""></option>
+                        <option value="g" onclick=""></option>
+                        <option value="g_sharp" onclick=""></option>
+                        <option value="a" onclick=""></option>
+                        <option value="b_flat" onclick=""></option>
+                        <option value="b" onclick=""></option>
+                        </select>
+                    </p>
+                    <p> Akkordtyp:
+                        <select id="select_type_for_chord">
+                        <option value="major" onclick="">Dur</option>
+                        <option value="minor" onclick="">Moll</option>
+                        <option value="sus" onclick="">Sus</option>
+                        <option value="dimin" onclick="">Vermindert</option>
+                        <option value="augmented" oncklick="">Erhöht</option>
+                        </select>
+                    </p>
+                </div>
+                <div id="scale" class="tabcontent">
+                    <p style="margin-right:var(--half-button-size);"> Grundton:
+                        <select id="select_root_for_scale">
+                        <option value="c" onclick=""></option>
+                        <option value="c_sharp" onclick=""></option>
+                        <option value="d" onclick=""></option>
+                        <option value="e_flat" onclick=""></option>
+                        <option value="e" onclick=""></option>
+                        <option value="f" onclick=""></option>
+                        <option value="f_sharp" onclick=""></option>
+                        <option value="g" onclick=""></option>
+                        <option value="g_sharp" onclick=""></option>
+                        <option value="a" onclick=""></option>
+                        <option value="b_flat" onclick=""></option>
+                        <option value="b" onclick=""></option>
+                        </select>
+                    </p>
+                    <p> Art der Tonleiter:
+                        <select id="select_type_for_scale">
+                        <option value="major" onclick="">Dur</option>
+                        <option value="minor" onclick="">Moll</option>
+                        </select>
+                    </p>
+                </div>
             </div>  
         </div>
     </body>
