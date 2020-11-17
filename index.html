@@ -47,15 +47,15 @@
                 <p><b>Allgemeines</b></p>
                 <p>Notenbezeichnungen:
                     <label for="de">
-                        <input type="radio" id="de" name="language" value="german" checked onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
+                        <input type="radio" id="de" name="language" value="german" checked onclick="changeNoteNames(window[this.value]);">
                         🇩🇪
                     </label>
                     <label for="en">
-                        <input type="radio" id="en" name="language" value="english" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
+                        <input type="radio" id="en" name="language" value="english" onclick="changeNoteNames(window[this.value]);">
                         🇬🇧
                     </label>
                    <label for="fr">
-                        <input type="radio" id="fr" name="language" value="french" onclick="assignKeyboardLayout(Object.assign({}, keyboard_lefthand, keyboard_righthand), window[this.value], 'both');">
+                        <input type="radio" id="fr" name="language" value="french" onclick="changeNoteNames(window[this.value]);">
                         🇫🇷
                     </label>
                 </p>
@@ -175,6 +175,57 @@
                 </div>
             </div> 
             <div id="accordion"> 
+                <div id="chords" class="tabcontent">
+                    <p style="margin-right:var(--half-button-size);"> Grundton:
+                        <select id="select_root_for_chord">
+                        <option value="c" onclick=""></option>
+                        <option value="c_sharp" onclick=""></option>
+                        <option value="d" onclick=""></option>
+                        <option value="e_flat" onclick=""></option>
+                        <option value="e" onclick=""></option>
+                        <option value="f" onclick=""></option>
+                        <option value="f_sharp" onclick=""></option>
+                        <option value="g" onclick=""></option>
+                        <option value="g_sharp" onclick=""></option>
+                        <option value="a" onclick=""></option>
+                        <option value="b_flat" onclick=""></option>
+                        <option value="b" onclick=""></option>
+                        </select>
+                    </p>
+                    <p> Akkordtyp:
+                        <select id="select_type_for_chord">
+                        <option value="major" onclick="">Dur</option>
+                        <option value="minor" onclick="">Moll</option>
+                        <option value="sus" onclick="">Sus</option>
+                        <option value="dimin" onclick="">Vermindert</option>
+                        <option value="augmented" oncklick="">Erhöht</option>
+                        </select>
+                    </p>
+                </div>
+                <div id="scale" class="tabcontent">
+                    <p style="margin-right:var(--half-button-size);"> Grundton:
+                        <select id="select_root_for_scale">
+                        <option value="c" onclick=""></option>
+                        <option value="c_sharp" onclick=""></option>
+                        <option value="d" onclick=""></option>
+                        <option value="e_flat" onclick=""></option>
+                        <option value="e" onclick=""></option>
+                        <option value="f" onclick=""></option>
+                        <option value="f_sharp" onclick=""></option>
+                        <option value="g" onclick=""></option>
+                        <option value="g_sharp" onclick=""></option>
+                        <option value="a" onclick=""></option>
+                        <option value="b_flat" onclick=""></option>
+                        <option value="b" onclick=""></option>
+                        </select>
+                    </p>
+                    <p> Art der Tonleiter:
+                        <select id="select_type_for_scale">
+                        <option value="major" onclick="">Dur</option>
+                        <option value="minor" onclick="">Moll</option>
+                        </select>
+                    </p>
+                </div>
                 <div id="lefthand" class="tabcontent">
                     <div id="bassboard" class="keyboard">
                         <div id="bassrow 3" class="row">
@@ -433,57 +484,6 @@
                         </div>
                     </div>
                 </div> 
-                <div id="chords" class="tabcontent">
-                    <p style="margin-right:var(--half-button-size);"> Grundton:
-                        <select id="select_root_for_chord">
-                        <option value="c" onclick=""></option>
-                        <option value="c_sharp" onclick=""></option>
-                        <option value="d" onclick=""></option>
-                        <option value="e_flat" onclick=""></option>
-                        <option value="e" onclick=""></option>
-                        <option value="f" onclick=""></option>
-                        <option value="f_sharp" onclick=""></option>
-                        <option value="g" onclick=""></option>
-                        <option value="g_sharp" onclick=""></option>
-                        <option value="a" onclick=""></option>
-                        <option value="b_flat" onclick=""></option>
-                        <option value="b" onclick=""></option>
-                        </select>
-                    </p>
-                    <p> Akkordtyp:
-                        <select id="select_type_for_chord">
-                        <option value="major" onclick="">Dur</option>
-                        <option value="minor" onclick="">Moll</option>
-                        <option value="sus" onclick="">Sus</option>
-                        <option value="dimin" onclick="">Vermindert</option>
-                        <option value="augmented" oncklick="">Erhöht</option>
-                        </select>
-                    </p>
-                </div>
-                <div id="scale" class="tabcontent">
-                    <p style="margin-right:var(--half-button-size);"> Grundton:
-                        <select id="select_root_for_scale">
-                        <option value="c" onclick=""></option>
-                        <option value="c_sharp" onclick=""></option>
-                        <option value="d" onclick=""></option>
-                        <option value="e_flat" onclick=""></option>
-                        <option value="e" onclick=""></option>
-                        <option value="f" onclick=""></option>
-                        <option value="f_sharp" onclick=""></option>
-                        <option value="g" onclick=""></option>
-                        <option value="g_sharp" onclick=""></option>
-                        <option value="a" onclick=""></option>
-                        <option value="b_flat" onclick=""></option>
-                        <option value="b" onclick=""></option>
-                        </select>
-                    </p>
-                    <p> Art der Tonleiter:
-                        <select id="select_type_for_scale">
-                        <option value="major" onclick="">Dur</option>
-                        <option value="minor" onclick="">Moll</option>
-                        </select>
-                    </p>
-                </div>
             </div>  
         </div>
     </body>

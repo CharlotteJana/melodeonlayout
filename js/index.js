@@ -56,8 +56,7 @@ function startup() {
   note_names = window[document.querySelector('input[name = "language"]:checked').value];
   keyboard_lefthand = window[document.querySelector('#setting_layout_lefthand').value];
   keyboard_righthand = window[document.querySelector('#setting_layout_righthand').value];
-  assignKeyboardLayout(keyboard_lefthand, note_names, "left");
-  assignKeyboardLayout(keyboard_righthand, note_names, "right");
+  changeNoteNames(note_names);
   showRows(row_number);
 
   // accordeon buttons
@@ -323,9 +322,6 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
         window.keyboard_lefthand = layout;
         var rows = document.querySelectorAll('#bassboard > .row');
     }
-    else if(hand == "both"){
-        var rows = document.querySelectorAll('#keyboard > .row, #bassboard > .row');
-    }
     rows.forEach(row => {
         row.style.display = "flex";
     })
@@ -356,6 +352,17 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
             row.style.display = "none";
         }
     })  */
+}
+
+function changeNoteNames(new_note_names){
+    window.note_names = new_note_names;
+    assignKeyboardLayout(keyboard_lefthand, note_names, 'left');
+    assignKeyboardLayout(keyboard_righthand, note_names, 'right');
+    var noteOptions = document.querySelectorAll('#select_root_for_chord > option, #select_root_for_scale > option');
+    noteOptions.forEach(option => {
+        var name = note_names[option.value];
+        option.innerHTML = name[0].toUpperCase() + name.slice(1); // capitalized version of note name
+    })
 }
 
 function rotateKeyboard(direction) {
