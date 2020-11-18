@@ -17,6 +17,7 @@ var accbtns_push_hide_all = false; // bool
 var note_names;
 var adjustKeys_direction;
 var rotateKeyboard_direction;
+var root_note; // base note for selected chord or scale
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -83,7 +84,6 @@ function startup() {
   accidentals.forEach(accidental => {
       accidental.addEventListener('click', toggleNote);
   })
-    
   optionOctave();
   rect_list[2].dispatchEvent(new Event('click'));
   //rect_list[6].dispatchEvent(new Event('click'));
@@ -91,6 +91,10 @@ function startup() {
   
   // only show melody tab
   document.getElementById('righthandTab').dispatchEvent(new Event('click'));
+  
+  // add event listeners to select forms
+  document.querySelector('select#root_of_chord').addEventListener('change', showChord);
+  document.querySelector('select#type_of_chord').addEventListener('change', showChord);
 
   adjustKeys(5)
   rotateKeyboard(4);
@@ -255,28 +259,32 @@ function refresh_visible_accbtns(clear=false) {
     rects_all.forEach(rect => {
         setStyle(rect, "opacity", "0%");
     })
-    notes_visible.forEach(note => {
-        var note_visible = svgOctaveDiff.querySelector('path[id^='.concat(note.substr(0,2)));
-        note_visible.classList.remove("hidden");
-        if(note.length > 2){ // note with accidentals 
-            var accidental = svgOctaveDiff.querySelector('text[id='.concat(note));
-            accidental.classList.remove("hidden");
-        }
-        if(note.substr(0,2) in notes_with_ledgers){
-            ledgers_visible = notes_with_ledgers[note.substr(0,2)];
-            ledgers.forEach(ledger => {
-                if(ledgers_visible.includes(ledger.id)){
-                    setStyle(ledger, "opacity", "1");
-                }                
+
+    for (var nv = notes_visible.values(), val= null; val=nv.next().value; ) {
+        try{
+            var note_diff = svgOctaveDiff.querySelector('path[id^='.concat(val.substr(0,2)));
+            note_diff.classList.remove("hidden");
+            if(val.length > 2){ // note with accidentals 
+                var accidental = svgOctaveDiff.querySelector('text[id='.concat(val));
+                accidental.classList.remove("hidden");
+            }
+            if(val.substr(0,2) in notes_with_ledgers){
+                ledgers_visible = notes_with_ledgers[val.substr(0,2)];
+                ledgers.forEach(ledger => {
+                    if(ledgers_visible.includes(ledger.id)){
+                        setStyle(ledger, "opacity", "1");
+                    }                
+                })
+            }
+            var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(val.substr(0,1)));
+            rects.forEach(rect => {
+                if(rect.id.replace(/[0-9]/g, '') == val.replace(/[0-9]/g, '')){
+                    setStyle(rect, "opacity", "0.3");
+                }
             })
         }
-        var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note.substr(0,1)));
-        rects.forEach(rect => {
-            if(rect.id.replace(/[0-9]/g, '') == note.replace(/[0-9]/g, '')){
-                setStyle(rect, "opacity", "0.3");
-            }
-        })
-    })
+        catch (e) {}
+    }
 
     // refresh push buttons
     var accbtns_push = document.querySelectorAll('#keyboard div.push, #bassboard div.push');
@@ -308,6 +316,35 @@ function refresh_visible_accbtns(clear=false) {
         }
     }
 }
+
+//######################
+//     music theory
+//######################
+
+function setRootNote(root){
+    window.root_note = root;
+    document.querySelector('#root_of_scale > option[value="'+ root +'"]').selected = 'selected';
+    document.querySelector('#root_of_scale > option[value="'+ root +'"]').selected = 'selected';
+}
+
+function showChord() {
+    setRootNote(document.querySelector("#root_of_chord").value);
+    var type = document.querySelector("#type_of_chord").value;
+    var chord_pattern = chords_3[type+"_r1"];
+    var note_indices = chord_pattern.map(x => x + window.note_order.indexOf(root_note+"1"));
+    var all_note_indices = note_indices;
+    for (i = 1; i <=6; i++) {
+        all_note_indices = all_note_indices.concat(note_indices.map(x => x+i*12));
+    }
+    all_note_indices = all_note_indices.filter(function(element) { return element < window.note_order.length });
+    window.notes_visible = new Set;
+    all_note_indices.forEach(index => {
+        window.notes_visible.add(window.note_order[index]);
+        // TODO: Add button-ids to accbtns_visible
+    });
+    refresh_visible_accbtns();
+}
+
 
 //######################
 //     settings
@@ -358,7 +395,7 @@ function changeNoteNames(new_note_names){
     window.note_names = new_note_names;
     assignKeyboardLayout(keyboard_lefthand, note_names, 'left');
     assignKeyboardLayout(keyboard_righthand, note_names, 'right');
-    var noteOptions = document.querySelectorAll('#select_root_for_chord > option, #select_root_for_scale > option');
+    var noteOptions = document.querySelectorAll('#root_of_chord > option, #root_of_scale > option');
     noteOptions.forEach(option => {
         var name = note_names[option.value];
         option.innerHTML = name[0].toUpperCase() + name.slice(1); // capitalized version of note name
