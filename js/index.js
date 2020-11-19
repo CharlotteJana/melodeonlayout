@@ -141,7 +141,6 @@ function toggleNote() {
     var hide_note; // bool
     var note_with_oct; // note with octave specification in scientific pitch notation, i.e. f4_flat
     var note_no_oct; // note without octave specification, i.e. f_flat
-    var button_ids = new Array();
     var note_names = new Set();
 
     // ######### definition of variables "note_with_oct" and "hide_note" ##########
@@ -156,12 +155,6 @@ function toggleNote() {
             if(rect.getAttributeNS(null, 'style').includes('opacity:0.3')){
                 hide_note = true;
             }
-        /* var button_ids = Object.keys(window.keyboard_righthand).filter(
-                key => window.keyboard_righthand[key].replace(/[0-9]/g, '') === note_no_oct
-            );
-            var notes_with_oct = Object.entries(window.keyboard_righthand).filter(
-                key => window.keyboard_righthand[key].replace(/[0-9]/g, '') === note_no_oct 
-            )*/
         }
         // case: an accordeon button has been clicked
         else if(this.tagName.toLowerCase() == "div"){
@@ -186,11 +179,8 @@ function toggleNote() {
             }
         }
 
-    // ######### definition of arrays "button_ids" and "note_names" ##########
+    // ######### definition of array "note_names" ##########
     if(option_octave == "diff"){
-        button_ids = Object.keys(keyboard).filter(
-            key => keyboard[key] === note_with_oct
-        );
         note_names.add(note_with_oct);
     }
     else if (option_octave == "ignore"){
@@ -198,46 +188,26 @@ function toggleNote() {
         Object.entries(keyboard).forEach(
             ([key, value]) => {
                 if(value.replace(/[0-9]/g, '') == note_no_oct){
-                    button_ids.push(key);
                     note_names.add(value);
                 } 
             }
         );
-       /* for (const [key, value] of Object.entries(window.keyboard_righthand)) {
-            if(${key}.replace(/[0-9]/g, '') == note_no_oct){
-                button_ids.push(${key});
-                note_names.push(${value});
-            }
-          }*/
     }
 
     // ######### change values of "notes_visible" and "accbtns_visible" ##########
     if(hide_note){
         // delete elements of note_names from notes_visible
         notes_visible = new Set([...notes_visible].filter(x => !note_names.has(x)));
-        //if(rect != null){
-        //    setStyle(rect, "opacity", "0%");
-        //}
-        for (let i = 0; i < button_ids.length; i++) {
-            window.accbtns_visible.delete(button_ids[i]);
-        }
     }
     else{
         notes_visible = new Set([...notes_visible, ...note_names]);
-        //if(rect != null){
-        //    setStyle(rect, "opacity", "0.3");
-        //}
-        for (let i = 0; i < button_ids.length; i++) {
-            window.accbtns_visible.add(button_ids[i]);
-        }
     }
     refresh_visible_accbtns();
 }
 
 function refresh_visible_accbtns(clear=false) {
-
+    window.accbtns_visible = new Set();
     if(clear){
-        window.accbtns_visible = new Set();
         window.notes_visible = new Set();
     }
 
@@ -260,30 +230,63 @@ function refresh_visible_accbtns(clear=false) {
         setStyle(rect, "opacity", "0%");
     })
 
-    for (var nv = notes_visible.values(), val= null; val=nv.next().value; ) {
-        try{
-            var note_diff = svgOctaveDiff.querySelector('path[id^='.concat(val.substr(0,2)));
-            note_diff.classList.remove("hidden");
-            if(val.length > 2){ // note with accidentals 
-                var accidental = svgOctaveDiff.querySelector('text[id='.concat(val));
+    var keyboard = Object.assign({}, window.keyboard_lefthand, window.keyboard_righthand);
+    var button_ids = new Array();
+    var note_with_oct;
+    var note_no_oct;
+    for (var nv = notes_visible.values(), note_with_oct= null; note_with_oct=nv.next().value; ) {
+        obj_with_oct = svgOctaveDiff.querySelector('path[id^='.concat(note_with_oct.substr(0,2)));
+        note_no_oct = note_with_oct.replace(/[0-9]/g, '');
+        try{ // show note on svgOctaveDiff
+            
+            obj_with_oct.classList.remove("hidden");
+
+            // show accidentals
+            if(note_with_oct.length > 2){
+                var accidental = svgOctaveDiff.querySelector('text[id='.concat(note_with_oct));
                 accidental.classList.remove("hidden");
             }
-            if(val.substr(0,2) in notes_with_ledgers){
-                ledgers_visible = notes_with_ledgers[val.substr(0,2)];
+
+            // show ledgers
+            if(note_with_oct.substr(0,2) in notes_with_ledgers){
+                ledgers_visible = notes_with_ledgers[note_with_oct.substr(0,2)];
                 ledgers.forEach(ledger => {
                     if(ledgers_visible.includes(ledger.id)){
                         setStyle(ledger, "opacity", "1");
                     }                
                 })
             }
-            var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(val.substr(0,1)));
+        }
+        catch (e) {}
+        try{ // show note on svgOctaveIgnore
+            var rects = svgOctaveIgnore.querySelectorAll('rect[id^='.concat(note_with_oct.substr(0,1)));
             rects.forEach(rect => {
-                if(rect.id.replace(/[0-9]/g, '') == val.replace(/[0-9]/g, '')){
+                if(rect.id.replace(/[0-9]/g, '') == note_no_oct){
                     setStyle(rect, "opacity", "0.3");
                 }
             })
         }
         catch (e) {}
+        try{ // update accbtns_visible
+            if(option_octave == "diff"){
+                button_ids = Object.keys(keyboard).filter(
+                    key => keyboard[key] === note_with_oct
+                );
+            }
+            else if (option_octave == "ignore"){
+                Object.entries(keyboard).forEach(
+                    ([key, value]) => {
+                        if(value.replace(/[0-9]/g, '') == note_no_oct){
+                            button_ids.push(key);
+                        } 
+                    }
+                );
+            }
+            for (let i = 0; i < button_ids.length; i++) {
+                window.accbtns_visible.add(button_ids[i]);
+            } 
+        }
+        catch (e) {}                   
     }
 
     // refresh push buttons
