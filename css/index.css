@@ -92,6 +92,7 @@ body {
 }
 
 .hide_staff { /* for staff */
+   /* TODO: rename to "hidden" */
    display: none;
 }
 
@@ -156,6 +157,10 @@ body {
 
  .tabbttn > span {
    line-height: 30px;
+ }
+
+ .comment {
+    display: none;
  }
 
  .active {

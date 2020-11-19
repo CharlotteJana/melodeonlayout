@@ -175,7 +175,7 @@
                 </div>
             </div> 
             <div id="accordion"> 
-                <div id="chords" class="tabcontent">
+                <div id="chords" class="tabcontent row-with-space">
                     <p style="margin-right:var(--half-button-size);"> Grundton:
                         <select id="root_of_chord">
                         <option value="c"></option>
@@ -192,7 +192,7 @@
                         <option value="b"></option>
                         </select>
                     </p>
-                    <p> Akkordtyp:
+                    <p style="margin-right:var(--half-button-size);"> Akkordtyp:
                         <select id="type_of_chord">
                         <option value="major">Dur</option>
                         <option value="minor">Moll</option>
@@ -200,6 +200,11 @@
                         <option value="dimin">Vermindert</option>
                         <option value="augmented">Erhöht</option>
                         </select>
+                    </p>
+                    <p id="notes_on_chord">
+                        <span class="hide_staff" id="comment_notes_missing">Fehlende Noten: </span>
+                        <span class="hide_staff" id="comment_notes_push" style="background-color: var(--color-push); padding: 3px;"></span>
+                        <span class="hide_staff" id="comment_notes_pull" style="background-color: var(--color-pull); padding: 3px"></span>
                     </p>
                 </div>
                 <div id="scale" class="tabcontent">

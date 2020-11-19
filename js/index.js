@@ -334,20 +334,51 @@ function showChord() {
     setRootNote(document.querySelector("#root_of_chord").value);
     var type = document.querySelector("#type_of_chord").value;
     var chord_pattern = chords_3[type+"_r1"];
-    var note_indices = chord_pattern.map(x => x + window.note_order.indexOf(root_note+"1"));
+    var note_indices = chord_pattern.map(x => x + window.note_order.indexOf(root_note.substring(0, 1) + "1" + root_note.substring(1)));
     var all_note_indices = note_indices;
     for (i = 1; i <=6; i++) {
         all_note_indices = all_note_indices.concat(note_indices.map(x => x+i*12));
     }
     all_note_indices = all_note_indices.filter(function(element) { return element < window.note_order.length });
     window.notes_visible = new Set;
+    var chord_notes = new Set;
     all_note_indices.forEach(index => {
         window.notes_visible.add(window.note_order[index]);
-        // TODO: Add button-ids to accbtns_visible
+        chord_notes.add(window.note_order[index].replace(/[0-9]/g, ''));
     });
     refresh_visible_accbtns();
+    var missing_chord_push = [];
+    var missing_chord_pull = [];
+    for (var chord = chord_notes.values(), note=null; note=chord.next().value; ){
+        if(missing_push_notes.has(note)){
+            missing_chord_push.push(note_names[note]);
+        }
+        if(missing_pull_notes.has(note)){
+            missing_chord_pull.push(note_names[note]);
+        }
+    }
+    if(missing_chord_push.length == 0 & missing_chord_pull.length == 0){
+        document.querySelector("#comment_notes_missing").classList.add("hide_staff");
+        document.querySelector("#comment_notes_push").classList.add("hide_staff");
+        document.querySelector("#comment_notes_pull").classList.add("hide_staff");
+    }
+    else{
+        if(missing_chord_push.length > 0){
+            document.querySelector("#comment_notes_missing").classList.remove("hide_staff");
+            document.querySelector("#comment_notes_push").classList.remove("hide_staff");
+            document.querySelector("#comment_notes_push").innerHTML = missing_chord_push.join(', ');
+        } else {        
+            document.querySelector("#comment_notes_push").classList.add("hide_staff");
+        }
+        if(missing_chord_pull.length > 0){
+            document.querySelector("#comment_notes_missing").classList.remove("hide_staff");
+            document.querySelector("#comment_notes_pull").classList.remove("hide_staff");
+            document.querySelector("#comment_notes_pull").innerHTML = missing_chord_pull.join(', ');
+        } else {
+            document.querySelector("#comment_notes_pull").classList.add("hide_staff");
+        }
+    }
 }
-
 
 //######################
 //     settings
@@ -365,6 +396,8 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
     rows.forEach(row => {
         row.style.display = "flex";
     })
+    var pull_notes = new Set;
+    var push_notes = new Set;
     for (var x in layout) {
         if (layout.hasOwnProperty(x)){
             try{
@@ -380,11 +413,30 @@ function assignKeyboardLayout(layout, note_names, hand = null) {
                     document.getElementById(x).parentNode.style.display = "flex";
                 }
                 else{
-                    document.getElementById(x).innerHTML = note_names[layout[x].replace(/[0-9]/g, '')];
+                    var note = layout[x].replace(/[0-9]/g, '');
+                    document.getElementById(x).innerHTML = note_names[note];
                     document.getElementById(x).parentNode.style.display = "flex";
+                    if(hand == "right"){
+                        if(x.endsWith('_')){
+                            pull_notes.add(note);
+                        }
+                        else{
+                            push_notes.add(note);
+                        }
+                    }
                 }
             }
             catch (e) {continue}
+        }
+    }
+    if(hand == "right"){
+        for (var i in nnames_usual){
+            if(!pull_notes.has(nnames_usual[i])){
+                window.missing_pull_notes.add(nnames_usual[i]);
+            }
+            if(!push_notes.has(nnames_usual[i])){
+                window.missing_push_notes.add(nnames_usual[i]);
+            }
         }
     }
 /*     rows.forEach(row => {

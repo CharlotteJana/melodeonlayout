@@ -15,6 +15,9 @@ var note_order = [
     "c6", "c6_sharp", "d6", "e6_flat", "e6", "f6", "f6_sharp", "g6", "g6_sharp", "a6", "b6_flat", "b6"
 ]
 
+var missing_pull_notes = new Set;
+var missing_push_notes = new Set;
+
 // explanation of r1,r2... : the number indicates the position of the root note in the chord, 
 // i.e. for triads we have r1 = normal form, r2 = second inversion, r3 = first inversion
 
