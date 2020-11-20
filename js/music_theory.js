@@ -40,6 +40,22 @@ var chords_4 = {
     "augmaj7_r1": [0,4,8,11], "augmaj7_r2": [0,1,5,9], "augmaj7_r3": [0,3,4,8], "augmaj7_r4": [0,4,7,8], // augmented major seventh, ex: Cmaj7#5 = c,e,g#,b
     "dim7_r1": [0,3,6,9] // diminished seventh, ex: Cdim7 = c,e♭,g♭,b♭♭=a (same for r1 - r4)
 }
+
+var scales = { // see https://de.wikipedia.org/wiki/Tonleiter#Bildliche_Darstellung_von_Tonleitern
+    "major": [0,2,4,5,7,9,11],
+    "minor": [0,2,3,5,7,8,10], // natural minor
+    "harmonic_minor": [0,2,3,5,7,8,11],
+    "melodic_minor_asc": [0,2,3,5,7,9,11], // ascending melodic minor / jazz minor / Ionian b3
+    "dorian": [0,2,3,5,7,9,10],
+    "phrygian": [0,1,3,5,7,8,10],
+    "phrygian_domiant": [0,1,4,5,7,8,10], //
+    "lydian": [0,2,4,6,7,9,11],
+    "mixolydian": [0,2,4,5,7,9,10],
+    "locrian": [0,1,3,5,6,8,10],
+    "arabic": [0,1,4,5,7,8,11], // Zigeuner-Dur
+    "hungarian": [0,2,3,6,7,8,11] // Zigeuner-Moll
+}
+
 //#################################
 //    note names and translations
 //#################################

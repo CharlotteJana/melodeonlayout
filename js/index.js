@@ -85,19 +85,20 @@ function startup() {
       accidental.addEventListener('click', toggleNote);
   })
   optionOctave();
-  rect_list[2].dispatchEvent(new Event('click'));
-  //rect_list[6].dispatchEvent(new Event('click'));
-  //rect_list[9].dispatchEvent(new Event('click'));
-  
-  // only show melody tab
-  document.getElementById('righthandTab').dispatchEvent(new Event('click'));
-  
+   
   // add event listeners to select forms
-  document.querySelector('select#root_of_chord').addEventListener('change', showChord);
-  document.querySelector('select#type_of_chord').addEventListener('change', showChord);
+  document.querySelector('select#root_of_chord').addEventListener('change', function() {showChord('chord');});
+  document.querySelector('select#type_of_chord').addEventListener('change', function() {showChord('chord')});
+  document.querySelector('select#root_of_scale').addEventListener('change', function() {showChord('scale');});
+  document.querySelector('select#type_of_scale').addEventListener('change', function() {showChord('scale');});
 
   adjustKeys(5)
   rotateKeyboard(4);
+  rect_list[2].dispatchEvent(new Event('click'));
+  // only show melody tab
+  document.getElementById('righthandTab').dispatchEvent(new Event('click'));
+  //rect_list[6].dispatchEvent(new Event('click'));
+  //rect_list[9].dispatchEvent(new Event('click'));
 }
 
 //######################
@@ -330,12 +331,23 @@ function setRootNote(root){
     document.querySelector('#root_of_scale > option[value="'+ root +'"]').selected = 'selected';
 }
 
-function showChord() {
-    setRootNote(document.querySelector("#root_of_chord").value);
-    var type = document.querySelector("#type_of_chord").value;
-    var possible_patterns = {...chords_3, ...chords_4};
-    var chord_pattern = possible_patterns[type+"_r1"];
-    var note_indices = chord_pattern.map(x => x + window.note_order.indexOf(root_note.substring(0, 1) + "1" + root_note.substring(1)));
+function showChord(chordtype) {
+    if(chordtype == "chord"){
+        setRootNote(document.querySelector("#root_of_chord").value);
+        var type = document.querySelector("#type_of_chord").value;
+        var possible_patterns = {...chords_3, ...chords_4};
+        var pattern = possible_patterns[type+"_r1"];
+    }
+    else if(chordtype == "scale"){
+        setRootNote(document.querySelector("#root_of_scale").value);
+        var type = document.querySelector("#type_of_scale").value;
+        var possible_patterns = scales;
+        var pattern = possible_patterns[type];
+    }
+    else{
+        // TODO: Add Error
+    }
+    var note_indices = pattern.map(x => x + window.note_order.indexOf(root_note.substring(0, 1) + "1" + root_note.substring(1)));
     var all_note_indices = note_indices;
     for (i = 1; i <=6; i++) {
         all_note_indices = all_note_indices.concat(note_indices.map(x => x+i*12));
@@ -359,24 +371,24 @@ function showChord() {
         }
     }
     if(missing_chord_push.length == 0 & missing_chord_pull.length == 0){
-        document.querySelector("#comment_notes_missing").classList.add("hide_staff");
-        document.querySelector("#comment_notes_push").classList.add("hide_staff");
-        document.querySelector("#comment_notes_pull").classList.add("hide_staff");
+        document.querySelector("#"+chordtype+"_notes_missing").classList.add("hide_staff");
+        document.querySelector("#"+chordtype+"_notes_missing_push").classList.add("hide_staff");
+        document.querySelector("#"+chordtype+"_notes_missing_pull").classList.add("hide_staff");
     }
     else{
         if(missing_chord_push.length > 0){
-            document.querySelector("#comment_notes_missing").classList.remove("hide_staff");
-            document.querySelector("#comment_notes_push").classList.remove("hide_staff");
-            document.querySelector("#comment_notes_push").innerHTML = missing_chord_push.join(', ');
+            document.querySelector("#"+chordtype+"_notes_missing").classList.remove("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_push").classList.remove("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_push").innerHTML = missing_chord_push.join(', ');
         } else {        
-            document.querySelector("#comment_notes_push").classList.add("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_push").classList.add("hide_staff");
         }
         if(missing_chord_pull.length > 0){
-            document.querySelector("#comment_notes_missing").classList.remove("hide_staff");
-            document.querySelector("#comment_notes_pull").classList.remove("hide_staff");
-            document.querySelector("#comment_notes_pull").innerHTML = missing_chord_pull.join(', ');
+            document.querySelector("#"+chordtype+"_notes_missing").classList.remove("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_pull").classList.remove("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_pull").innerHTML = missing_chord_pull.join(', ');
         } else {
-            document.querySelector("#comment_notes_pull").classList.add("hide_staff");
+            document.querySelector("#"+chordtype+"_notes_missing_pull").classList.add("hide_staff");
         }
     }
 }

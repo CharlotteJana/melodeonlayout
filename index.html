@@ -209,12 +209,12 @@
                         </select>
                     </p>
                     <p id="notes_on_chord">
-                        <span class="hide_staff" id="comment_notes_missing">Fehlende Noten: </span>
-                        <span class="hide_staff" id="comment_notes_push" style="background-color: var(--color-push); padding: 3px;"></span>
-                        <span class="hide_staff" id="comment_notes_pull" style="background-color: var(--color-pull); padding: 3px"></span>
+                        <span class="hide_staff" id="chord_notes_missing">Fehlende Noten: </span>
+                        <span class="hide_staff" id="chord_notes_missing_push" style="background-color: var(--color-push); padding: 3px;"></span>
+                        <span class="hide_staff" id="chord_notes_missing_pull" style="background-color: var(--color-pull); padding: 3px"></span>
                     </p>
                 </div>
-                <div id="scale" class="tabcontent">
+                <div id="scale" class="tabcontent row-with-space">
                     <p style="margin-right:var(--half-button-size);"> Grundton:
                         <select id="root_of_scale">
                         <option value="c"></option>
@@ -231,11 +231,26 @@
                         <option value="b"></option>
                         </select>
                     </p>
-                    <p> Art der Tonleiter:
-                        <select id="select_type_for_scale">
-                        <option value="major" onclick="">Dur</option>
-                        <option value="minor" onclick="">Moll</option>
+                    <p style="margin-right:var(--half-button-size);"> Art der Tonleiter:
+                        <select id="type_of_scale">
+                        <option value="major">Dur</option>
+                        <option value="minor">Moll</option>
+                        <option value="harmonic_minor">harmonisches Moll</option>
+                        <option value="melodic_minor_asc">melodisches Moll (aufsteigend)</option>
+                        <option value="dorian">Dorisch</option>
+                        <option value="phrygian">Phrygisch</option>
+                        <option value="lydian">Lydisch</option>
+                        <option value="mixolydian">Mixolydisch</option>
+                        <option value="locrian">Lokrisch</option>
+                        <option value="phrygian_domiant">Spanische / Jüdische Tonleiter</option>
+                        <option value="arabic">Arabisch (Zigeuner-Dur)</option>
+                        <option value="hungarian">Ungarisch (Zigeuner-Moll)</option>
                         </select>
+                    </p>
+                    <p id="notes_on_scale">
+                        <span class="hide_staff" id="scale_notes_missing">Fehlende Noten: </span>
+                        <span class="hide_staff" id="scale_notes_missing_push" style="background-color: var(--color-push); padding: 3px;"></span>
+                        <span class="hide_staff" id="scale_notes_missing_pull" style="background-color: var(--color-pull); padding: 3px"></span>
                     </p>
                 </div>
                 <div id="lefthand" class="tabcontent">
