@@ -26,19 +26,28 @@ var chords_3 = {
     "major_r1": [0,4,7], "major_r2": [0,3,8], "major_r3": [0,5,9], // major chord, ex: C
     "minor_r1": [0,3,7], "minor_r2": [0,4,9], "minor_r3": [0,5,8], // minor chord, ex: c
     "dimin_r1": [0,3,6], "dimin_r2": [0,3,9], "dimin_r3": [0,6,9], // diminished chord, ex:
-    "sus_r1":   [0,2,7], "sus_r2":  [0,5,10], "sus_r3":   [0,5,7], // sus, ex: Csus
-    "augmented_r1": [0,4,8] // augmented chord, ex: Caug (same for r1, r2, r3)
+    "sus2_r1": [0,2,7], "sus2_r2":  [0,5,10], "sus2_r3": [0,5,7], // sus2, ex: Csus2 = c,d,g
+    "sus4_r1": [0,5,7], "sus4_r2":  [0,5,10], "sus4_r3": [0,2,7], // sus4, ex: Csus4 = c,f,g
+    "dom7_simple_r1": [0,4,10], "dom7_simple_r2": [0,2,6], "dom7_simple_r3": [0,6,8], // dominant seventh without 5th, ex: C⁷ = c,e,b♭
+    "maj7_simple_r1": [0,4,11], "maj7_simple_r1": [0,1,5], "maj7_simple_r3": [0,7,8], // major seventh without 5th, ex: Cmaj7 = c,e,h
+    "aug_r1": [0,4,8], "aug_r2": [0,4,8], "aug_r3": [0,4,8] // augmented chord, ex: Caug
 }
 
 // chords with 4 notes:
 var chords_4 = {
-    "major7_r1": [0,4,7,11], "major7_r2": [0,1,5,8], "major7_r3": [0,4,5,9], "major7_r4": [0,3,7,8], // major seventh, ex: Cmaj7 = c,e,g,b
+    "maj7_r1": [0,4,7,11], "maj7_r2": [0,1,5,8], "maj7_r3": [0,4,5,9], "maj7_r4": [0,3,7,8], // major seventh, ex: Cmaj7 = c,e,g,b
     "minor7_r1": [0,3,7,10], "minor7_r2": [0,2,5,10], "minor7_r3": [0,3,5,8], "minor7_r4": [0,4,7,9], // minor seventh, ex: Cmin7 = c,e♭,g,b♭
-    "dom7_r1": [0,4,7,10], "dom7_r2": [0,2,6,9], "dom7_r3": [0,3,5,9], "dom7_r4": [0,3,6,8], // dominant seventh, ex: C7 = c,e,g,b♭    
+    "dom7_r1": [0,4,7,10], "dom7_r2": [0,2,6,9], "dom7_r3": [0,3,5,9], "dom7_r4": [0,3,6,8], // dominant seventh, ex: C⁷ = c,e,g,b♭    
     "hdim_7_r1": [0,3,6,10], "hdim_7_r2": [0,2,5,8], "hdim_7_r3": [0,4,6,9], "hdim_7_r4": [0,3,7,9], // halfdiminished seventh, ex: Cm7b5, C∅ = c,e♭,g♭,b♭
     "minmaj7_r1": [0,3,7,11], "minmaj7_r2": [0,1,4,8], "minmaj7_r3": [0,4,5,8], "minmaj7_r4": [0,4,8,9], //minor major seventh, ex: Cm maj7 = c,e♭,g,h
     "augmaj7_r1": [0,4,8,11], "augmaj7_r2": [0,1,5,9], "augmaj7_r3": [0,3,4,8], "augmaj7_r4": [0,4,7,8], // augmented major seventh, ex: Cmaj7#5 = c,e,g#,b
-    "dim7_r1": [0,3,6,9] // diminished seventh, ex: Cdim7 = c,e♭,g♭,b♭♭=a (same for r1 - r4)
+    "sext_r1": [0,4,7,9], "sext_r2": [0,3,7,10], "sext_r3": [0,2,5,9], "sext_r4": [0,3,5,8], // major with added sixth, ex: C6 = c,e,g,a
+    "7sus4_r1": [0,5,7,10], "7sus4_r2": [0,2,7,9], "7sus4_r3": [0,3,5,10], "7sus4_r4": [0,2,5,7],// ex: C7sus4 = c,f,g,b♭
+    "7/b5_r1": [0,4,6,10], "7/b5_r2": [0,2,6,8], "7/b5_r3": [0,4,6,10], "7/b5_r4": [0,2,6,8], // ex: C7/♭5 = c,e,g♭,b♭
+    "7/#5_r1": [0,4,8,10], "7/#5_r2": [0,2,6,10], "7/#5_r3": [0,2,4,8], "7/#5_r4": [0,4,6,8], // ex: C7/#5 = c,e,g♯,b♭
+    "7/b9_simple_r1": [0,1,4,10], "7/b9_simple_r2": [0,2,3,6], "7/b9_simple_r3": [0,6,8,9], "7/b9_simple_r4": [0,3,9,11], // ex: C7/b9 = c,e,(g),b♭,d♭ TODO: I changed 13 to 1. Is this allowed?
+    "7/#9_simple_r1": [0,3,4,10], "7/#9_simple_r2": [0,2,5,6], "7/#9_simple_r3": [0,6,8,11], "7/#9_simple_r4": [0,1,7,9], // ex: C7/#9 = c,e,(g),b♭,d♯
+    "dim7_r1": [0,3,6,9], "dim7_r2": [0,3,6,9],"dim7_r3": [0,3,6,9], "dim7_r4": [0,3,6,9] // diminished seventh, ex: Cdim7 = c,e♭,g♭,b♭♭=a
 }
 
 var scales = { // see https://de.wikipedia.org/wiki/Tonleiter#Bildliche_Darstellung_von_Tonleitern
