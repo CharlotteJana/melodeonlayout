@@ -27,7 +27,7 @@ var chords_3 = {
     "minor_r1": [0,3,7], "minor_r2": [0,4,9], "minor_r3": [0,5,8], // minor chord, ex: c
     "dimin_r1": [0,3,6], "dimin_r2": [0,3,9], "dimin_r3": [0,6,9], // diminished chord, ex:
     "sus_r1":   [0,2,7], "sus_r2":  [0,5,10], "sus_r3":   [0,5,7], // sus, ex: Csus
-    "augmented": [0,4,8] // augmented chord, ex: Caug (same for r1, r2, r3)
+    "augmented_r1": [0,4,8] // augmented chord, ex: Caug (same for r1, r2, r3)
 }
 
 // chords with 4 notes:
@@ -38,7 +38,7 @@ var chords_4 = {
     "hdim_7_r1": [0,3,6,10], "hdim_7_r2": [0,2,5,8], "hdim_7_r3": [0,4,6,9], "hdim_7_r4": [0,3,7,9], // halfdiminished seventh, ex: Cm7b5, C∅ = c,e♭,g♭,b♭
     "minmaj7_r1": [0,3,7,11], "minmaj7_r2": [0,1,4,8], "minmaj7_r3": [0,4,5,8], "minmaj7_r4": [0,4,8,9], //minor major seventh, ex: Cm maj7 = c,e♭,g,h
     "augmaj7_r1": [0,4,8,11], "augmaj7_r2": [0,1,5,9], "augmaj7_r3": [0,3,4,8], "augmaj7_r4": [0,4,7,8], // augmented major seventh, ex: Cmaj7#5 = c,e,g#,b
-    "dim7": [0,3,6,9] // diminished seventh, ex: Cdim7 = c,e♭,g♭,b♭♭=a (same for r1 - r4)
+    "dim7_r1": [0,3,6,9] // diminished seventh, ex: Cdim7 = c,e♭,g♭,b♭♭=a (same for r1 - r4)
 }
 //#################################
 //    note names and translations

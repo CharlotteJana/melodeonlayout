@@ -333,7 +333,8 @@ function setRootNote(root){
 function showChord() {
     setRootNote(document.querySelector("#root_of_chord").value);
     var type = document.querySelector("#type_of_chord").value;
-    var chord_pattern = chords_3[type+"_r1"];
+    var possible_patterns = {...chords_3, ...chords_4};
+    var chord_pattern = possible_patterns[type+"_r1"];
     var note_indices = chord_pattern.map(x => x + window.note_order.indexOf(root_note.substring(0, 1) + "1" + root_note.substring(1)));
     var all_note_indices = note_indices;
     for (i = 1; i <=6; i++) {
